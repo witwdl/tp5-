@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>新增职位</title>
+    {css href="/static/admin/assets/libs/layui/css/layui.css"}
+    <!--{css href="/static/admin/kindeditor/themes/default/default.css"}-->
+    {css href="/static/admin/assets/libs/font-awesome/css/font-awesome.min.css"}
+</head>
+<body>
+
+<div class="layui-container" style="margin-top: 20px;">
+    <div class="layui-fluid">
+        <div class="layui-col-md12">
+            <form class="layui-form">
+                <div class="layui-form-item" style="height: 80px;line-height: 80px;" >
+                    <label  class="layui-form-label">职位名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required  lay-verify="required"  placeholder="请输入职位信息名称" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">职位薪资</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="pay" required  lay-verify="required" placeholder="请输入职位薪资" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">工作年限</label>
+                    <div class="layui-input-block">
+                        <select name="age" lay-verify="">
+                            <option value="0">不限</option>
+                            <option value="1">应届毕业生</option>
+                            <option value="2">3年以下</option>
+                            <option value="3">3-5年</option>
+                            <option value="4">5-10年</option>
+                            <option value="5">10年以上</option>
+                            <option value="6">无要求</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">要求学历</label>
+                    <div class="layui-input-block">
+                    <select name="education" lay-verify="">
+                        <option value="0">不限</option>
+                        <option value="1">大专</option>
+                        <option value="2">本科</option>
+                        <option value="3">硕士</option>
+                        <option value="4">博士</option>
+                        <option value="5">无要求</option>
+                    </select>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">兼职/全职</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="isdisplay" value="1" title="全职" checked>
+                        <input type="radio" name="isdisplay" value="2" title="兼职">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">企业名</label>
+                    <div class="layui-input-block">
+                        <select name="cid" lay-verify="">
+                            {volist name="list" id="v"}
+                            <option value="{$v['id']}">{$v['name']}</option>
+                            {/volist}
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">职位分类</label>
+                    <div class="layui-input-block">
+                        <select name="jcid" lay-verify="">
+                            {volist name="categorylist" id="category"}
+                            <option value="{$category.id}">{$category.name}</option>
+                            {/volist}
+                        </select>
+
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">发布时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="createtime" required  lay-verify="required" placeholder="请输入发布时间" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">职位诱惑</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="lure" required  lay-verify="required" placeholder="请输入职位诱惑" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">职位信息描述</label>
+                    <div class="layui-input-block">
+                        <textarea name="content" placeholder="请输入职位信息描述" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="save-btn">立刻提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{js href="/static/admin/assets/libs/jquery/jquery-1.11.1.min.js"}
+{js href="/static/admin/assets/libs/layui/layui.all.js"}
+{js href="/static/admin/kindeditor/kindeditor-all.js"}
+{js href="/static/admin/kindeditor/lang/zh_CN.js"}
+<!-- <script>
+    KindEditor.ready(function(K) {
+        window.editor = K.create('#editor_id');
+    });
+</script> -->
+<script>
+    layui.use('form', function () {
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(save-btn)', function (data) {
+
+            var index = parent.layer.getFrameIndex(window.name);
+
+            $.ajax({
+                type : 'post',
+                url : '/occupation',
+                data : data.field,
+                dataType : 'json',
+                success : function (data) {
+                    if(data.status) {
+                        parent.layer.msg(data.msg, {icon: 1, time: 1500});
+                    } else {
+                        parent.layer.msg(data.msg, {icon: 2, time: 1500});
+                    }
+                    //关闭iframe
+                    setTimeout(function(){
+                        parent.location.reload();
+                        parent.layer.close(index);
+                    },2000);
+                },
+                error: function () {
+                    layer.msg('aJax执行失败!');
+                }
+            });
+
+            return false;
+        });
+    });
+
+    var editor;
+    KindEditor.ready(function(K) {
+        editor = K.create('textarea[name="content"]', {
+            allowFileManager : false,
+            afterBlur: function () { this.sync(); }
+        });
+    });
+
+</script>
+
+</body>
+</html>
+

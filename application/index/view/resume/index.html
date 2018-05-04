@@ -1,0 +1,500 @@
+
+
+{extend name="index/index" /}
+{block name="main"}
+<!-- 页面主体START -->
+<div class="container clearfix" id="container">
+    <div>
+        <input type="hidden" id="isShowDefault" value="1">
+        <div class="clearfixs mr_created">
+            <div class="mr_myresume_l">
+                <div id="mr_mr_head">
+
+                    <div class="mr_top_bg" id="baseinfo">
+                        <img class="mr_headimg" id="userpic"
+                             src="/uploads/resumepic/{$result.headpic}" width="120"
+                             height="120" alt="头像">
+                        <img class="opa" src="/static/index/resume/resume/tou_c3707c7.png" width="702" height="170">
+                        <img class="shadow" src="/static/index/resume/resume/shadow_tx_a482008.png" width="119"
+                             height="119" style="display: none;">
+                        <input type="file" class="mr_headfile" id="headPic" name="headPic"
+                               title="支持jpg、jpeg、gif、png格式，文件小于10M">
+
+                    </div>
+                    <div class="mr_baseinfo">
+                        <i class="mr_left_bg"></i>
+                        <i class="mr_right_bg"></i>
+
+                        <div class="mr_p_name mr_w604 clearfixs">
+                            <span class="mr_edit dn"><i></i><em>编辑</em></span><span class="mr_name">{$result.name}</span>
+                        </div>
+
+                        <div class="mr_p_introduce mr_w604 clearfixs">
+                            <span class="mr_edit dn" data-type="0" ><i></i><em>编辑</em></span><span
+                                class="mr_intro mr_intro_normal" title="精通php mysql linux 微信开发 有较强的沟通、学习能力.">{$result.selfappraisal}</span>
+                        </div>
+
+                        <div class="mr_p_info mr_infoed mr_w604 clearfixs">
+                            <div class="info_t">
+                            </div>
+                            <div class="info_j">
+                            <span class="base_info">
+                                <i></i>
+
+                                            <em></em>
+                                        </span>
+
+                                                                <em class="x">{$result.maxbackground}</em>
+                                <em class="j">
+                                    <span class="job_span">工作经验:{$result.work_date}</span>
+                                </em>
+
+                            </div>
+                            <div class="info_b" data-phone="13840986500">
+                                <span class="mobile"><i></i><em title="13840986500">{$result.phone}</em></span>
+                                <span class="email"><i></i><em title="dlwangjun@foxmail.com">{$result.email}</em></span>
+                            </div>
+                            <div class="mr_sns dn">
+                            </div>
+                            <span class="mr_edit mr_head_r mr_edit_on dn" data-birth-year="1989" data-birth-month="05"
+                                  data-birth-date="" data-sf="" data-shenfen=" · " data-sex="男" data-xl="大专"
+                                  data-gzjy="1年" data-city="上海" data-mobile="13840986500"
+                                  data-email="dlwangjun@foxmail.com"><i></i><em>编辑</em></span>
+                        </div>
+                        <div class="privacy_settings">
+                            <!--简历编辑-->
+
+                                <a class="privacy_settings_img" href="{:url('index/resume/editresume',['id'=>$result.id])}"></a>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="mr_content">
+    <!--工作经历-->
+                    <div id="workExperience" class="item_container_target">
+                        <div class="mr_moudle_head clearfixs mr_w604">
+                            <div class="mr_head_l">
+                                <div class="mr_title">
+                                    <span class="mr_title_l"></span><span class="mr_title_c"> 工作经历  </span><span
+                                        class="mr_title_r"></span>
+                                </div>
+                            </div>
+                            <div class="mr_head_r addworkExperience" data-id="{$result.id}"  >
+                                <i></i><em>添加</em>
+                            </div>
+                        </div>
+                        <!--无工作经验-->
+                        {if condition="($work eq null)  "}
+                        <div class="mr_moudle_content mr_w604">
+
+                            <div class="mr_empty_add  addworkExperience" data-id="{$result.id}">
+                                <i></i><span> 添加工作经历  </span>
+                            </div>
+                            <div class="list_show">
+                                <div class="dn new_addjob_hide">
+                                    <div class="mr_jobe_list">
+                                        <div class="clearfixs">
+                                            <div class="mr_content_l clearfixs">
+                                                <div class="l1">
+                                                    <img src="https://www.lagou.com/resume/myresume.html" alt="公司logo"
+                                                         class="my_company_logo dn">
+                                                </div>
+                                                <div class="l2">
+                                                    <h4></h4>
+                                                    <span></span>
+                                                </div>
+                                            </div>
+                                            <div class="mr_content_r">
+                                                <div class="mr_edit mr_c_r_t" data-expid="" data-logo="" data-comname=""
+                                                     data-posname="" data-startime="" data-endtime="" data-content="">
+                                                    <i></i><em>编辑</em>
+                                                </div>
+                                                <span></span><span> — </span><span></span>
+                                            </div>
+                                        </div>
+                                        <div class="dn mr_content_m ueditor_parse">
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="updatejob_wrap">
+                                </div>
+                            </div>
+                        </div>
+                        {else/}
+                        <!--有工作经验-->
+
+                        <div class="mr_moudle_content mr_w604">
+                            <div class="list_show">
+                                <div class="updatejob_wrap">
+                                    {volist name="work" id='w'}
+                                    <div class="mr_jobe_list">
+                                        <div class="clearfixs">
+                                            <div class="mr_content_l clearfixs">
+                                                <div class="l1">
+                                                    <img src="https://www.lagou.com/resume/myresume.html" alt="公司logo" class="my_company_logo dn">
+                                                </div>
+                                                <div class="l2">
+                                                    <h4>{$w['company']}</h4>
+                                                    <span>{$w['position']}</span>
+                                                </div>
+                                            </div>
+                                            <div class="mr_content_r">
+                                                <div class="mr_edit mr_c_r_t updatewoke" data-id="{$w['id']}" >
+                                                    <i></i><em>编辑</em>
+                                                </div>
+                                                <span>{$w['workdate']}</span>
+                                            </div>
+                                        </div>
+                                        <div class="dn mr_content_m ueditor_parse">
+
+                                        </div>
+                                    </div>
+                                    {/volist}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/if}
+                    </div>
+    <!--学历经历-->
+                    <div id="educationalBackground" class="item_container_target">
+                        <div class="mr_moudle_head clearfixs mr_w604">
+                            <div class="mr_head_l">
+                                <div class="mr_title">
+                                    <span class="mr_title_l"></span><span class="mr_title_c">教育经历</span><span
+                                        class="mr_title_r"></span>
+                                </div>
+                            </div>
+                            <div class="mr_head_r addeducationalBackground" id="addeducationalBackground" data-id="{$result.id}">
+                                <i></i><em>添加</em>
+                            </div>
+                        </div>
+                        <!--无教育经历-->
+                        {if condition="($education eq null)  "}
+                        <div class="mr_moudle_content mr_w604">
+
+                            <div class="mr_empty_add addeducationalBackground" data-id="{$result.id}">
+                                <i></i><span class="addeducationalBackground" data-id="{$result.id}">添加教育经历</span>
+                            </div>
+                            <div class="list_show">
+                            </div>
+                        </div>
+                        {else/}
+                        <!--有教育经历-->
+                        {volist name="education" id = "e" }
+                        <div class="mr_moudle_content mr_w604">
+
+
+                            <div class="list_show">
+                                <div class="clearfixs mb46 mr_jobe_list">
+                                    <div class="mr_content_l">
+                                        <div class="l2">
+                                            <h4>{$e.school}</h4>
+                                            <span>{$e.background} · {$e.profession}</span>
+                                        </div>
+                                    </div>
+                                    <div class="mr_content_r">
+                                        <div class="mr_edit mr_c_r_t updateeducation"    data-id="{$e.id} " >
+                                            <i></i><em>编辑</em>
+                                        </div>
+                                        <span>{$e.graduation_date} 毕业</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/volist}
+
+
+
+                        {/if}
+                    </div>
+                    <div id="projectExperience" class="dn item_container_target">
+                        <div class="mr_moudle_head clearfixs mr_w604">
+                            <div class="mr_head_l">
+                                <div class="mr_title">
+                                    <span class="mr_title_l"></span><span class="mr_title_c">项目经验</span><span
+                                        class="mr_title_r"></span>
+                                </div>
+                            </div>
+                            <div class="mr_head_r" id="addprojectExperience">
+                                <i></i><em>添加</em>
+                            </div>
+                        </div>
+                        {if condition="($work eq null)  "}
+                        <div class="mr_moudle_content mr_w604">
+
+                            <div class="mr_empty_add ">
+                                <i></i><span>添加项目经验</span>
+                            </div>
+                            <div class="temp_hide dn">
+                                <div class="dn new_addpro_hide">
+                                    <div class="mr_jobe_list" data-id="">
+                                        <div class="clearfixs">
+                                            <div class="mr_content_l">
+                                                <div class="l2">
+                                                    <a class="projectTitle"></a>
+                                                    <p></p>
+                                                </div>
+                                            </div>
+                                            <div class="mr_content_r">
+                                                <div class="mr_edit mr_c_r_t">
+                                                    <i></i><em>编辑</em>
+                                                </div>
+                                                <span></span><span> - </span><span></span>
+                                            </div>
+                                        </div>
+                                        <div class="mr_content_m ueditor_parse">
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="updatepro_wrap"></div>
+                            </div>
+
+                            <div class="list_show">
+                                <div class="dn new_addpro_hide">
+                                    <div class="mr_jobe_list" data-id="">
+                                        <div class="clearfixs">
+                                            <div class="mr_content_l">
+                                                <div class="l2">
+                                                    <a class="projectTitle"></a>
+                                                    <p></p>
+                                                </div>
+                                            </div>
+                                            <div class="mr_content_r">
+                                                <div class="mr_edit mr_c_r_t">
+                                                    <i></i><em>编辑</em>
+                                                </div>
+                                                <span></span><span> - </span><span></span>
+                                            </div>
+                                        </div>
+                                        <div class="mr_content_m ueditor_parse">
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="updatepro_wrap">
+                                </div>
+
+                            </div>
+                        </div>
+                        {else/}
+                        <div class="mr_moudle_content mr_w604">
+
+                            <div class="mr_empty_add ">
+                                <i></i><span>添加项目经验</span>
+                            </div>
+                            <div class="temp_hide dn">
+                                <div class="dn new_addpro_hide">
+                                    <div class="mr_jobe_list" data-id="">
+                                        <div class="clearfixs">
+                                            <div class="mr_content_l">
+                                                <div class="l2">
+                                                    <a class="projectTitle"></a>
+                                                    <p></p>
+                                                </div>
+                                            </div>
+                                            <div class="mr_content_r">
+                                                <div class="mr_edit mr_c_r_t">
+                                                    <i></i><em>编辑</em>
+                                                </div>
+                                                <span></span><span> - </span><span></span>
+                                            </div>
+                                        </div>
+                                        <div class="mr_content_m ueditor_parse">
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="updatepro_wrap"></div>
+                            </div>
+
+                            <div class="list_show">
+                                <div class="dn new_addpro_hide">
+                                    <div class="mr_jobe_list" data-id="">
+                                        <div class="clearfixs">
+                                            <div class="mr_content_l">
+                                                <div class="l2">
+                                                    <a class="projectTitle"></a>
+                                                    <p></p>
+                                                </div>
+                                            </div>
+                                            <div class="mr_content_r">
+                                                <div class="mr_edit mr_c_r_t">
+                                                    <i></i><em>编辑</em>
+                                                </div>
+                                                <span></span><span> - </span><span></span>
+                                            </div>
+                                        </div>
+                                        <div class="mr_content_m ueditor_parse">
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="updatepro_wrap">
+                                </div>
+
+                            </div>
+                        </div>
+                        {/if}
+
+                    </div>
+
+
+
+                    <div id="selfDescription" class="item_container_target">
+                        <div>
+                            <div class="mr_moudle_head clearfixs mr_w604">
+                                <div class="mr_head_l">
+                                    <div class="mr_title">
+                                        <span class="mr_title_l"></span><span class="mr_title_c">自我描述</span><span
+                                            class="mr_title_r"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="mr_moudle_content clearfixs mr_w604">
+
+                                <div class="mr_empty_add  dn ">
+                                    <i></i><span>更新自我描述</span>
+                                </div>
+
+                                <div class="self_des_list clearfixs ">
+                                    <div class="mr_self_l">
+                                        <i></i>
+                                        <img class="mr_headimg"
+                                             src="/uploads/resumepic/{$result.headpic}"
+                                             alt="头像">
+                                    </div>
+                                    <div class="mr_self_r ueditor_parse">
+                                        <ol>
+                                            <li><p>{$result.selfappraisal}</p></li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- 确定关闭plus弹窗 by honge -->
+
+
+</div>
+<script>
+    $(function () {
+        // 编辑简历
+
+        //create 添加 工作经历
+        $('.addworkExperience').click(function () {
+            var id = $(this).attr('data-id');
+            //iframe层-父子操作
+            layer.open({
+                title: '添加简历信息',
+                type: 2,
+                area: ['700px', '550px'],
+                fixed: false, //不固定
+                maxmin: true,
+                content: '/indexresume/creatework/' + id
+            });
+        });
+        // 更新 工作经历
+        $('.updatewoke').click(function () {
+            var id = $(this).attr('data-id');
+            //iframe层-父子操作
+            layer.open({
+                title: '修改简历信息',
+                type: 2,
+                area: ['700px', '550px'],
+                fixed: false, //不固定
+                maxmin: true,
+                content: '/indexresume/editwork/' + id
+            });
+        });
+        // 添加教育经历
+        $('.addeducationalBackground').click(function () {
+            var id = $(this).attr('data-id');
+            //iframe层-父子操作
+            layer.open({
+                title: '添加简历信息',
+                type: 2,
+                area: ['700px', '550px'],
+                fixed: false, //不固定
+                maxmin: true,
+                content: '/indexresume/createeducation/' + id
+            });
+        });
+        // 更新 教育经历
+        $('.updateeducation').click(function () {
+            var id = $(this).attr('data-id');
+            //iframe层-父子操作
+            layer.open({
+                title: '修改简历信息',
+                type: 2,
+                area: ['700px', '550px'],
+                fixed: false, //不固定
+                maxmin: true,
+                content: '/indexresume/editeducation/' + id
+            });
+        });
+
+        // 上传头像
+        layui.use('upload', function () {
+            var upload = layui.upload;
+
+            //执行实例
+            var uploadInst = upload.render({
+                elem: '#headPic' //绑定元素
+                , url: '/indexresume' //上传接口
+                , method: 'post'
+                , accept: 'images'   //允许文件的类型
+                , size: 200 //最大允许上传文件的大小  KB
+                , field: 'img_url'
+                , done: function (res) {
+                    if (res.code) {
+                        $('.mr_headimg').attr('src', '/uploads/resumepic/' + res.data.src);
+                        $('.mr_headhover').css('display','none');
+                        $('.mr_basicform').append('<input type="hidden" name="headpic" value="' + res.data.src + '" >');
+                        layer.msg(res.msg, {icon: 1, time: 1500});
+                    } else {
+                        layer.msg(res.msg, {icon: 2, time: 1500});
+                    }
+                }
+            });
+        });
+    });
+
+</script>
+
+<!-- 页面主体END -->
+
+<!-- footer -->
+
+<!-- feedback -->
+
+
+
+{/block}
+<!-- jquery lib -->
+<!-- ueditor -->
+
+
+

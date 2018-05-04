@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>法力兔招聘网</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+    {css href="/static/admin/assets/libs/font-awesome/css/font-awesome.min.css"}
+    <style>
+        body {
+            background: #fff;
+        }
+        .login_head {
+            height: 50px;
+            line-height: 50px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        .login_head .left {
+            font-size: 20px;
+            padding-left: 25px;
+        }
+        .login_head .right a {
+            color: #50B08B;
+            font-size: 16px;
+            padding-left: 140px;
+        }
+        .login {
+            padding-left: 40px;
+        }
+        input::-webkit-input-placeholder {
+            color: #ccc;
+            font-weight: 400;
+        }
+        .input_text {
+            width: 95%;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            padding: .27rem 0;
+            font-size: .45rem;
+            height: 55px;
+            color: #333;
+            border: 0;
+            font-size: 18px;
+            color: #000;
+            border-bottom: 1px solid #E8E9EB;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <!-- 这里是页面内容区 -->
+    <div class="row login_head">
+        <div class="col-50 left">
+            登录法力兔
+        </div>
+        <div class="col-50 right">
+            <a href="{:url('mobile/index/register')}">注册</a>
+        </div>
+    </div>
+    <div class="row login">
+        <form name="mobile_login" id="mobile_login">
+            <input type="text" name="username" class="input_text" id="username" autocomplete="off" placeholder="请输入已验证的手机号或邮箱">
+            <input type="password" name="password" class="input_text" id="password" placeholder="请输入密码">
+        </form>
+    </div>
+    <div class="content-block" style="padding-left:15px;margin-top: 50px;">
+        <p><a style="border: none;background: #50B08B;color: #fff;" id="create-btn" href="javascript:;" class="button button-big">登录</a></p>
+    </div>
+</div>
+
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+
+<script>
+    $(function(){
+        $('#create-btn').click(function(){
+            $.ajax({
+                type : 'post',
+                url : '/mobile/index/doLogin',
+                data : $('#mobile_login').serialize(),
+                success : function(data) {
+                    if(data.code == 1) {
+                        window.location.href = '/mobile';
+                    } else {
+                        $.alert(data.msg);
+                        $('#password').val('');
+
+                    }
+                },
+                error : function () {
+
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

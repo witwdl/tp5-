@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>法力兔招聘网</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+    {css href="/static/admin/assets/libs/font-awesome/css/font-awesome.min.css"}
+    <style>
+        header  {
+            background: rgba(79,176,140,1) !important;
+        }
+        header h1 {
+            color: #fff !important;
+        }
+        .page_head {
+            height: 50px;
+            line-height: 40px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .page_head .left {
+            float: left;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .page_head .right span {
+            color: #df8505;
+            font-size: 18px;
+            display: block;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+        }
+        .page_head .right a {
+            position: absolute;
+            right: 15px;
+            top: 7px;
+            display: block;
+            float: right;
+            background-color: #f5f5f5;
+            padding: 0 20px;
+            height: 30px;
+            line-height: 30px;
+            margin-top: 6px;
+            color: #00b38a;
+            border-radius: 15px;
+            font-size: 15px;
+        }
+        .pay,.location,.type,.year,.cap{
+            font-size: 16px;
+        }
+        .page_body i {
+            color: rgba(79,176,140,1);
+        }
+        .location,.type {
+            text-align: center;
+        }
+        .page_body {
+            margin-bottom: 10px;
+        }
+        .page_body .intro {
+            font-size: 14px;
+            color: #999;
+            margin-left: 15px;
+        }
+        .body_company {
+            height: 105px;
+            position: relative;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+        .body_company .img {
+            position: absolute;
+            top: 20px;
+        }
+        .body_company .com h2 {
+            font-size: 24px;
+            color: rgba(79,176,140,1);
+            position: absolute;
+            left: 100px;
+        }
+        .body_company .com p {
+            font-size: 14px;
+            position: absolute;
+            left:100px;
+            top: 45px;
+            color: #999;
+        }
+        .body_company .approve {
+            font-size: 16px;
+            position: absolute;
+            top: 40px;
+            right: 0;
+        }
+        .body_job {
+            height: 40px;
+            line-height: 15px;
+            background: #DAF8EF;
+            color: #50B08B;
+            margin-bottom: 0;
+            margin-top: 0;
+        }
+        .body_job p {
+            font-size: 16px;
+        }
+        .job_intro {
+            padding: 10px 10px 10px 20px;
+        }
+        .job_intro .desc {
+            font-size: 14px;
+            word-break:break-all;
+            text-align:justify;
+        }
+    </style>
+</head>
+<body>
+
+<header class="bar bar-nav">
+    <a class="button button-link button-nav pull-left back" href="{:url('mobile/index/index')}">
+        <span style="color: #fff" class="icon icon-left"></span>
+    </a>
+    <h1 class='title'>职位详情</h1>
+    <a class="button button-link button-nav pull-right back" href="{:url('mobile/index/index')}">
+        <span style="color: #fff" class="icon icon-home"></span>
+    </a>
+</header>
+<nav class="bar bar-tab">
+    <a class="tab-item external active" href="{:url('mobile/index/index')}">
+        <span class="icon icon-home"></span>
+        <span class="tab-label">职位</span>
+    </a>
+    <a class="tab-item external" href="{:url('mobile/member/index')}">
+        <span class="icon icon-me"></span>
+        <span class="tab-label">我的</span>
+    </a>
+</nav>
+<div class="content">
+    <!-- 这里是页面内容区 -->
+    <div class="content-padded" style="margin-right: 0;">
+        <div class="row page_head">
+            <div class="col-80 left">
+                {$job['title']}
+            </div>
+        </div>
+        <div class="row page_body">
+            <div class="col-33 pay"><i class="fa fa-jpy" aria-hidden="true"></i> {$job['pay']}</div>
+            <div class="col-33 location"><i class="fa fa-map-marker" aria-hidden="true"></i> 上海</div>
+            <div class="col-33 type">
+                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                {$job['isdisplay'] == 1 ? '兼职' : '全职'}
+            </div>
+        </div>
+        <div class="row page_body">
+            <div class="col-40 year"><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;&nbsp;{$job['age']}年</div>
+            <div class="col-60 cap">
+                <i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp;
+                {switch name="$job['education']"}
+                {case value="0" break="1"}不限{/case}
+                {case value="1" break="1"}大专{/case}
+                {case value="2" break="1"}本科{/case}
+                {case value="3" break="1"}硕士{/case}
+                {case value="4" break="1"}博士{/case}
+                {case value="5" break="1"}无要求{/case}
+                {default /}系统错误
+                {/switch}
+            </div>
+        </div>
+        <div class="row page_body">
+            <div class="col-12">
+                <p class="intro">职位诱惑：{$job['lure']}</p>
+            </div>
+        </div>
+        <div class="row body_company">
+            <div class="col-20 img">
+                <img src="/uploads/companylogo/{$job['img_url']}" width="60">
+            </div>
+            <div class="col-60 com">
+                <h2>{$job['name']}</h2>
+                <p>电子商务/D轮及以上/150人-500人</p>
+            </div>
+            <div class="col-20 approve">
+                {$job['approve'] == 1 ? '<span style="color: #50B08B;">已认证</span>' : '<span style="color: #ff0000;">未认证</span>'}
+            </div>
+        </div>
+        <div class="row body_job">
+            <div class="col-100">
+                <p>职位描述</p>
+            </div>
+        </div>
+        <div class="row job_intro">
+            <div class="col-12 desc">
+                {$job['content']}
+            </div>
+        </div>
+        <div class="content-block" style="padding-left:0;">
+            <p><a style="border: none; background: #50B08B;color: #fff;" href="javascript:;" onclick="submitResume({$member['id']})" class="button button-big">投递简历</a></p>
+        </div>
+    </div>
+</div>
+
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+
+
+<script>
+
+    function submitResume(uid) {
+
+        if (uid == null) {
+            $.alert('请登录后投递简历');
+            setTimeout(function () {
+                window.location.href = '/mobile/login';
+            },2000);
+        } else {
+            $.alert('恭喜您，简历投递成功！');
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+{extend name="main/index" /}
+{block name="main"}
+<!-- Start right content -->
+<div class="content-page">
+    <!-- ============================================================== -->
+    <!-- Start Content here -->
+    <!-- ============================================================== -->
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="widget">
+                    <div class="widget-header transparent">
+                        <h2><strong>企业</strong> 列表</h2>
+                        <div class="additional-btn">
+                            <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                            <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+                            <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="data-table-toolbar">
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="toolbar-btn-action">
+                                        <a class="btn create-btn btn-success"><i class="fa fa-plus-circle"></i> 新增</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table data-sortable class="table table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>企业名称</th>
+                                    <th>企业网址</th>
+                                    <th>融资阶段</th>
+                                    <th>所属行业</th>
+                                    <th>企业规模</th>
+                                    <th>认证状态</th>
+                                    <th data-sortable="false">操作</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {volist name="list" id="v"}
+                                <tr>
+                                    <td>{$v.id}</td>
+                                    <td><strong>{$v.name}</strong></td>
+                                    <td><a href="{$v.link}" target="_blank">{$v.link}</a></td>
+                                    <td>{$v.financing}</td>
+                                    <td>{$v.tid}</td>
+                                    <td>{$v.scale}</td>
+                                    <td>{$v.approve == '1' ? '<i style="color: seagreen;font-size: 20px;margin-left: 20px;" class="fa fa-check-circle-o" aria-hidden="true"></i>' : '<i style="color: red;font-size: 20px;margin-left: 20px;" class="fa fa-times-circle-o" aria-hidden="true"></i>'}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-xs">
+                                            <a data-toggle="tooltip" title="详情" data-id="{$v['id']}"  class="btn btn-default read-btn"><i class="fa fa-search"></i></a>
+
+                                            <a data-toggle="tooltip" title="编辑"  class="btn btn-default edit-btn" data-id="{$v['id']}"><i class="fa fa-edit"></i></a>
+                                            <a data-toggle="tooltip" title="删除" class="btn btn-default del-btn" data-id="{$v['id']}"><i class="fa fa-times"></i></a>
+
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                {/volist}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="data-table-toolbar">
+                            {$list->render()}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- End Content here -->
+</div>
+<script>
+
+    $(function () {
+
+        $('.create-btn').click(function(){
+            //iframe层-父子操作
+            layer.open({
+                title : '新增企业',
+                type: 2,
+                area: ['1000px', '550px'],
+                fixed: false, //不固定
+                maxmin: true,
+                content: '/company/create'
+            });
+        });
+
+        $('.read-btn').click(function(){
+            var id = $(this).attr('data-id');
+
+            //iframe层-父子操作
+            layer.open({
+                title : '查看企业详情',
+                type: 2,
+                area: ['1000px', '550px'],
+                fixed: false, //不固定
+                maxmin: true,
+                content: '/company/' + id,
+            });
+        });
+
+
+        $('.edit-btn').click(function(){
+            var id = $(this).attr('data-id');
+
+            //iframe层-父子操作
+            layer.open({
+                title : '编辑企业信息',
+                type: 2,
+                area: ['1000px', '550px'],
+                fixed: false, //不固定
+                maxmin: true,
+                content: '/company/' + id + '/edit',
+            });
+        });
+
+
+        $('.del-btn').click(function () {
+            //获取用户ID
+            var id = $(this).attr('data-id');
+            var tr = $(this).parents('tr');
+            //询问框
+            var index = layer.confirm('您确认要删除该企业吗？', {
+                btn: ['确认', '取消'], //按钮
+                title: '提示',
+                icon: 7,
+            }, function () {
+                layer.close(index);
+                delAjax(id, tr);
+            });
+        });
+    });
+
+    // 执行AJAX删除
+    function delAjax(id, tr) {
+        $.ajax({
+            type: 'delete',
+            url: '/company/' + id,
+            dataType: 'json',
+            success: function (data) {
+                if (data.status) {
+                    tr.remove();
+                    layer.msg(data.info, {icon: 1, time: 1500});
+                } else {
+                    layer.msg(data.msg, {icon: 2, time: 1500});
+                }
+            },
+            error: function () {
+                alert('AJAX执行失败!');
+            }
+        });
+    }
+
+
+</script>
+
+
+
+
+{/block}

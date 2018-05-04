@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>新增教育经历</title>
+    {css href="/static/admin/assets/libs/layui/css/layui.css"}
+</head>
+<body>
+
+<div class="layui-container" style="margin-top: 20px;">
+    <div class="layui-fluid">
+        <div class="layui-col-md12">
+            <form class="layui-form">
+                <input type="hidden" name="rid" value="{$rid}">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">学校名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="school" required  lay-verify="required"  placeholder="学校名称" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">专业</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="profession" required  lay-verify="required" placeholder="专业" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">学历</label>
+                    <div class="layui-input-block">
+                        <select name="background" lay-verify="">
+                            <option value="1">高中</option>
+                            <option value="2">大专</option>
+                            <option value="3">本科</option>
+                            <option value="4">研究生</option>
+                            <option value="5">博士</option>
+                            <option value="6">其他</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">毕业时间</label>
+                    <div class="layui-inline"> <!-- 注意：这一层元素并不是必须的 -->
+                        <input type="text" class="layui-input" id="starttime" name="graduation_date">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="save-btn">立刻提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{js href="/static/admin/assets/libs/jquery/jquery-1.11.1.min.js"}
+{js href="/static/admin/assets/libs/layui/layui.all.js"}
+<script>
+
+
+    layui.use('laydate', function(data){
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#starttime' ,//指定元素
+            type: 'month',
+            done: function(value, date, endDate){
+
+
+            }
+        });
+
+
+    });
+
+
+    layui.use('form', function () {
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(save-btn)', function (data) {
+
+            var index = parent.layer.getFrameIndex(window.name);
+
+            $.ajax({
+                type : 'post',
+                url : '/indexresume/saveeducation',
+                data : data.field,
+                dataType : 'json',
+                success : function (data) {
+                    if(data.status) {
+                        parent.layer.msg(data.msg, {icon: 1, time: 1500});
+                    } else {
+                        parent.layer.msg(data.msg, {icon: 2, time: 1500});
+                    }
+                    //关闭iframe
+                    setTimeout(function(){
+                        parent.location.reload();
+                        parent.layer.close(index);
+                    },2000);
+            },
+                error: function () {
+                    layer.msg('aJax执行失败!');
+                }
+            });
+
+        return false;
+        });
+    });
+</script>
+</body>
+</html>
+

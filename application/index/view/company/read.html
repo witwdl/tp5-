@@ -1,0 +1,532 @@
+{extend name="index/index" /}
+{block name="main"}
+
+<div class="top_info">
+    <div class="top_info_wrap">
+        <img src="/uploads/companylogo/{$data['img_url']}" alt="{$data['name']}Logo" width="164" heihgt="164" />
+        <div class="company_info">
+            <div class="company_main">
+                <h1>
+                    <a  href="http://{$data['link']}" class="hovertips" target="_blank" rel="nofollow" title="{$data['name']}">
+                        {$data['name']}
+                    </a>
+                </h1>
+                <a href="http://{$data['link']}" class="icon-wrap" target="_blank" rel="nofollow" title="http://{$data['link']}">
+                    <i></i>
+                </a>
+                {if condition="$data['approve'] == 1"}
+                <a class="identification" title="法力兔认证企业">
+                    <i></i>
+                    <span>法力兔认证</span>
+                </a>
+                {else /}
+
+                {/if}
+                <div class="company_word">
+                    {$data['intro']}
+                </div>
+            </div>
+            <div class="company_data">
+                <ul>
+                    <li>
+                        <strong>
+                            49个
+                        </strong>
+                        <br />
+                        <span class="tipsys" original-title="该公司的在招职位数量">
+                            <span>招聘职位</span><span class="tip"></span>
+                        </span>
+                    </li>
+                    <li>
+                        <strong>
+                            100%
+                        </strong>
+                        <span class="tipsys" original-title="该公司7日内处理简历数占收取简历数比例">
+                            <span>简历及时处理率</span><span class="tip"></span>
+                        </span>
+                    </li>
+                    <li>
+                        <strong>
+                            2天
+                        </strong>
+                        <br />
+                        <span class="tipsys" original-title="该公司7日内从简历收取到最终处理的平均用时">
+                            <span>简历处理用时</span><span class="tip"></span>
+                        </span>
+                    </li>
+                    <li id="mspj" style="cursor:pointer;">
+                        <strong>
+                            15个
+                        </strong>
+                        <br />
+                        <span class="tipsys" original-title="该公司收到的面试评价数量">
+                            <span>面试评价</span><span class="tip"></span>
+                        </span>
+                    </li>
+                    <li>
+                        <strong>今天</strong><br />
+                        <span class="tipsys" original-title="该公司职位管理者最近一次登录时间">
+                            <span>企业最近登录</span><span class="tip"></span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="company_navs" class="company_navs">
+    <div class="company_navs_wrap">
+        <ul data-pjax>
+            <li  class="current" >
+                <a href="https://www.lagou.com/gongsi/255742.html" data-lg-tj-id="9100" data-lg-tj-no="0001" data-lg-tj-cid="idnull">公司主页</a>
+            </li>
+            <li >
+                <a href="https://www.lagou.com/gongsi/j255742.html" data-lg-tj-id="9100" data-lg-tj-no="0002" data-lg-tj-cid="idnull">招聘职位（49）</a>
+            </li>
+        </ul>
+        <div class="company_share">
+            <span>分享</span>
+            <a href="javascript:;" class="share_weibo" rel="nofollow" title="分享到微博" data-lg-tj-id="19vs" data-lg-tj-no="0001" data-lg-tj-cid="255742"></a>
+            <a href="javascript:;" class="share_weixin" rel="nofollow" title="分享到微信" data-lg-tj-id="19vs" data-lg-tj-no="0002" data-lg-tj-cid="255742"></a>
+            <a href="javascript:;" class="share_rountline" rel="nofollow" title="微信扫一扫，用小程序打开分享" data-lg-tj-id="19vs" data-lg-tj-no="0003" data-lg-tj-cid="255742"></a>
+            <div class="share_weixin_success" id="companyQrcode">
+                <!-- <img alt="移动端公司主页二维码" /> -->
+                <div class="qrcode_box">
+                </div>
+            </div>
+            <div class="share_rountline_success" id="companyRountLineQrcode">
+                <div class="rountline_qrcode_box">
+                    <img src="" width="130" height="130">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="company_navs_shadow"></div>
+
+<div id="main_container" style="width: 1020px;margin-top: 30px;">
+    <div id="container_left">
+        <div id="containerCompanyDetails">
+            <div class="item_container" id="company_intro">
+                <div class="item_ltitle">公司介绍</div>
+                <div class="item_content">
+                    <div class="company_intro_text">
+            <span class="company_content">PingPong立足于中国，以跨境支付为核心业务为中国的跨境电商领域提供金融服务。
+<br />
+<br />PingPong经过两年的快速发展，目前在全球三大洲拥有六分支机构，百余雇员。分布在香港、卢森堡、旧金山、东京以及杭州和深圳。并且在2017年获得了跨境支付领域单笔最大金额的投资。
+<br />
+<br />PingPong在同类行业中的优势，除了遥遥领先于竞争对手的合规体系之外，更为重要的是PingPong的人。PingPong完全可以说是一个小型世界村，除了海外归国创业的高管之外，管理团队既有外籍的合规专家，亦有在大型成熟企业任职多年的管理者；既有国内领头互联网公司的弄潮儿，亦有多年沉淀于前沿技术的学者，背景多元而目标统一。
+<br />
+<br />PingPong本质上是一家创业企业，她基于简单、务实的价值理念，PingPong能为提供一个专注于工作的环境和成就事业的机会。</span>
+                        <span class="text_over">展开</span>
+                    </div>
+
+                    <div class="company_image_gallery">
+                        <div id="imageGallery">
+                            <a rel="nofollow" href="javascript:;" class="prev avalible" id="prev"></a>
+                            <a rel="nofollow" href="javascript:;" class="next avalible" id="next"></a>
+                            <div class="rotateImages_wrap">
+                                <ul class="company_img" id="rotateImages">
+                                    <li  class="rotate_item"  data-item="i/image/M00/6B/48/CgpEMlmpKAWAQDOlABqGSlUoOaU985.jpg"></li>
+                                    <li  class="rotate_item"  data-item="i/image/M00/6B/49/CgpEMlmpKBeAf8y7AAS-xS-J9Dc517.jpg"></li>
+                                    <li  class="rotate_item"  data-item="i/image/M00/67/8F/CgpFT1mpKByANh8MABLz6ia1f3Q211.jpg"></li>
+                                    <li  class="rotate_item"  data-item="i/image/M00/6B/49/CgpEMlmpKB-AUHLiAAMRbVTgkL4823.jpg"></li>
+                                    <li  class="rotate_item"  data-item="i/image/M00/67/8F/CgpFT1mpKCSAPGznAAhSUI24I-k734.jpg"></li>
+                                    <li  class="rotate_item"  data-item="i/image/M00/6B/49/CgpEMlmpKCiAcCoJAAbFP9zEAfw546.jpg"></li>
+                                    <li  class="rotate_item"  data-item="i/image/M00/6B/49/CgpEMlmpKC2AVso7AAujKMoKNEI210.jpg"></li>
+                                    <li  class="rotate_item"  data-item="i/image/M00/67/8F/CgpFT1mpKESAVHs1AAYuoDEMYus706.jpg"></li>
+                                    <li  class="rotate_item rotate_active"  data-item="i/image/M00/67/8F/CgpFT1mpKOqALepGAADVC2sIZaE258.jpg"></li>
+                                    <li  class="rotate_item"  data-item="i/image/M00/6B/49/CgpEMlmpKPOAZiWOAAGwvMgCW5w268.jpg"></li>
+                                </ul>
+                            </div>
+                            <ul class="rotate_nav selectIndex">
+                                <li>
+                                    <a rel="nofollow" href="javascript:;" class="index "></a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="javascript:;" class="index "></a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="javascript:;" class="index "></a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="javascript:;" class="index "></a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="javascript:;" class="index "></a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="javascript:;" class="index "></a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="javascript:;" class="index "></a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="javascript:;" class="index "></a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="javascript:;" class="index  sel "></a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="javascript:;" class="index "></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="item_container" id="history_container">
+                <div class="item_ltitle">发展历程</div>
+                <div class="item_content">
+                    <ul class="history_ul">
+                        <li class="history_li clearfix " data-id="175167">
+                            <div class="li_date">
+                                <p class="date_day">23</p>
+                                <p class="date_year">2017 Mar</p>
+                            </div>
+                            <div class="li_type_icon li_type_icon5" title="其他"></div>
+                            <div class="li_desc">
+                                <p class="desc_title desc_hover clearfix" data-href="">
+                        <span class="desc_real_title ">
+                            <a >
+                                                                    日本东京office开始运营
+                                                            </a>
+                                                                                </span>
+                                </p>
+                                <div class="desc_intro">
+
+                                </div>
+                            </div>
+                            <span class="history_ul_vspilt"></span>
+                        </li>
+                        <li class="history_li clearfix " data-id="175168">
+                            <div class="li_date">
+                                <p class="date_day">14</p>
+                                <p class="date_year">2017 Mar</p>
+                            </div>
+                            <div class="li_type_icon li_type_icon2" title="资本"></div>
+                            <div class="li_desc">
+                                <p class="desc_title desc_hover clearfix" data-href="https://news.pingpongx.com/articles/17031415505747.htm">
+                        <span class="desc_real_title  desc_real_title_hover ">
+                            <a  href="https://news.pingpongx.com/articles/17031415505747.htm" title="https://news.pingpongx.com/articles/17031415505747.htm" target="_blank" rel="nofollow">
+                                                                    获得B轮融资
+                                                            </a>
+                                                        <a href="https://news.pingpongx.com/articles/17031415505747.htm" title="https://news.pingpongx.com/articles/17031415505747.htm" target="_blank" rel="nofollow">
+                                <i class="desc_link"></i>
+                            </a>
+                                                                                </span>
+                                </p>
+                                <div class="desc_intro">
+                                </div>
+                            </div>
+                            <span class="history_ul_vspilt"></span>
+                        </li>
+                        <li class="history_li clearfix " data-id="175166">
+                            <div class="li_date">
+                                <p class="date_day">12</p>
+                                <p class="date_year">2016 Dec</p>
+                            </div>
+                            <div class="li_type_icon li_type_icon5" title="其他"></div>
+                            <div class="li_desc">
+                                <p class="desc_title desc_hover clearfix" data-href="">
+                        <span class="desc_real_title ">
+                            <a >
+                                                                    欧洲卢森堡office开始运营
+                                                            </a>
+                                                                                </span>
+                                </p>
+                                <div class="desc_intro">
+
+                                </div>
+                            </div>
+                            <span class="history_ul_vspilt"></span>
+                        </li>
+                        <li class="history_li clearfix " data-id="175169">
+                            <div class="li_date">
+                                <p class="date_day">01</p>
+                                <p class="date_year">2016 Aug</p>
+                            </div>
+                            <div class="li_type_icon li_type_icon2" title="资本"></div>
+                            <div class="li_desc">
+                                <p class="desc_title desc_hover clearfix" data-href="https://news.pingpongx.com/articles/160712133755.htm">
+                        <span class="desc_real_title  desc_real_title_hover ">
+                            <a  href="https://news.pingpongx.com/articles/160712133755.htm" title="https://news.pingpongx.com/articles/160712133755.htm" target="_blank" rel="nofollow">
+                                                                    获得A轮融资
+                                                            </a>
+                                                        <a href="https://news.pingpongx.com/articles/160712133755.htm" title="https://news.pingpongx.com/articles/160712133755.htm" target="_blank" rel="nofollow">
+                                <i class="desc_link"></i>
+                            </a>
+                                                                                </span>
+                                </p>
+                                <div class="desc_intro">
+                                </div>
+                            </div>
+                            <span class="history_ul_vspilt"></span>
+                        </li>
+                        <li class="history_li clearfix " data-id="175165">
+                            <div class="li_date">
+                                <p class="date_day">01</p>
+                                <p class="date_year">2016 June</p>
+                            </div>
+                            <div class="li_type_icon li_type_icon5" title="其他"></div>
+                            <div class="li_desc">
+                                <p class="desc_title desc_hover clearfix" data-href="">
+                        <span class="desc_real_title ">
+                            <a >
+                                                                    香港office正式运营
+                                                            </a>
+                                                                                </span>
+                                </p>
+                                <div class="desc_intro">
+
+                                </div>
+                            </div>
+                            <span class="history_ul_vspilt"></span>
+                        </li>
+                        <li class="history_li clearfix " data-id="175164">
+                            <div class="li_date">
+                                <p class="date_day">01</p>
+                                <p class="date_year">2016 Apr</p>
+                            </div>
+                            <div class="li_type_icon li_type_icon5" title="其他"></div>
+                            <div class="li_desc">
+                                <p class="desc_title desc_hover clearfix" data-href="">
+                        <span class="desc_real_title ">
+                            <a >
+                                                                    深圳office正式运营
+                                                            </a>
+                                                                                </span>
+                                </p>
+                                <div class="desc_intro">
+
+                                </div>
+                            </div>
+                            <span class="history_ul_vspilt"></span>
+                        </li>
+                        <li class="history_li clearfix " data-id="175163">
+                            <div class="li_date">
+                                <p class="date_day">15</p>
+                                <p class="date_year">2015 Nov</p>
+                            </div>
+                            <div class="li_type_icon li_type_icon2" title="资本"></div>
+                            <div class="li_desc">
+                                <p class="desc_title desc_hover clearfix" data-href="">
+                        <span class="desc_real_title ">
+                            <a >
+                                                                    获得天使轮融资
+                                                            </a>
+                                                                                </span>
+                                </p>
+                                <div class="desc_intro">
+                                </div>
+                            </div>
+                            <span class="history_ul_vspilt"></span>
+                        </li>
+                        <li class="history_li clearfix " data-id="175162">
+                            <div class="li_date">
+                                <p class="date_day">18</p>
+                                <p class="date_year">2015 June</p>
+                            </div>
+                            <div class="li_type_icon li_type_icon5" title="其他"></div>
+                            <div class="li_desc">
+                                <p class="desc_title desc_hover clearfix" data-href="">
+                        <span class="desc_real_title ">
+                            <a >
+                                                                    PingPong国内公司正式成立
+                                                            </a>
+                                                                                </span>
+                                </p>
+                                <div class="desc_intro">
+
+                                </div>
+                            </div>
+                            <span class="history_ul_vspilt"></span>
+                        </li>
+                        <li class="history_li clearfix history_li_last" data-id="175161">
+                            <div class="li_date">
+                                <p class="date_day">01</p>
+                                <p class="date_year">2015 Mar</p>
+                            </div>
+                            <div class="li_type_icon li_type_icon5" title="其他"></div>
+                            <div class="li_desc">
+                                <p class="desc_title desc_hover clearfix" data-href="">
+                        <span class="desc_real_title ">
+                            <a >
+                                                                    美国公司在纽约成立并活动美国金融货币支付资质
+                                                            </a>
+                                                                                </span>
+                                </p>
+                                <div class="desc_intro">
+
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="interview_container item_container" id="interview_container">
+                <div id="interview_anchor"></div>
+                <div class="item_ltitle">公司评价</div>
+                <div class="reviews-area">
+                    <div class="list-container">
+                        <ul class="list-content">
+                            {volist name="comment" id="v"}
+                            <li class="review-area clearfix">
+                                <div class="review-right">
+                                    <div class="review-stars clearfix">
+                                        <a style="width: 100px;" class="review-name" title="">{$v['uid']['username'] ? $v['uid']['username'] : '法力兔注册用户'}</a>
+                                        <span class="review-date">{$v['create_time']}</span>
+                                    </div>
+
+                                    <div class="review-content">
+                                        <div>
+                                            <div class="interview-process">{$v['comment']}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            {/volist}
+                        </ul>
+                    </div>
+                </div>
+                <form class="layui-form">
+                    <input type="hidden" name="uid" id="uid" value="{$uid}">
+                    <input type="hidden" name="cid" value="{$data['id']}">
+                    <textarea id="editor" name="comment" placeholder="" autofocus></textarea>
+                    <button class="layui-btn" lay-submit lay-filter="save-btn" style="float: right;margin:10px 0;">提交留言</button>
+                </form>
+            </div>
+            <!--公司地址-->
+        </div>
+    </div>
+    <div id="container_right">
+        <!--公司基本信息-->
+        <div class="item_container" id="basic_container">
+            <div class="item_ltitle">公司基本信息</div>
+            <div class="item_content">
+                <ul>
+                    <li>
+                        <i class="type"></i>
+                        <span>{$data['tid']}</span>
+                    </li>
+                    <li>
+                        <i class="process"></i>
+                        <span>{$data['financing']}</span>
+                    </li>
+                    <li>
+                        <i class="number"></i>
+                        <span>{$data['scale']}</span>
+                    </li>
+                    <li>
+                        <i class="address"></i>
+                        <span>{$city.name}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--管理团队-->
+        <div class="company_managers item_container" id="company_managers">
+            <div class="item_ltitle">管理团队</div>
+            <div class="company_mangers_item">
+                <div class="managelist_wrap">
+                    <ul class="manager_list">
+                        <li class="item_has rotate_item">
+                            <img class="item_manger_photo_show" src="/static/index/gongsi/picture/cgpemlmpt5yax6isaabx2_30118561.jpg" alt="创始人头像" width="118" height="118" />
+                            <p class="item_manager_name">
+                                <span>陈宇</span>
+                            </p>
+                            <p class="item_manager_title">CEO</p>
+                            <div class="item_manager_content"><p>北美精算师，康涅狄格大学数学系硕士，复旦大学数学系学士。</p>
+                                <p>多年在Deloitte纽约总部任职。</p></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--时间轴-->
+        <div class="navigator_container" id="navigator_container">
+            <div class="nav_item nav_selected" data-name="#company_intro">
+                <div class="nav_item_icon_wrap"><em class="nav_item_icon"></em></div>
+                <div class="nav_item_icon_wrap"><em class="nav_item_icon_up"></em></div>
+                <span class="nav_item_text">公司介绍</span>
+            </div>
+            <div class="nav_item" data-name="#history_container">
+                <div class="nav_item_icon_wrap"><em class="nav_item_icon"></em></div>
+                <div class="nav_item_icon_wrap"><em class="nav_item_icon_up"></em></div>
+                <span class="nav_item_text">发展历程</span>
+            </div>
+            <div class="nav_item" data-name="#interview_container">
+                <div class="nav_item_icon_wrap"><em class="nav_item_icon"></em></div>
+                <div class="nav_item_icon_wrap"><em class="nav_item_icon_up"></em></div>
+                <span class="nav_item_text">公司评论</span>
+            </div>
+            <div class="nav_item nav_item_last" data-name="#location_container">
+                <div class="nav_item_icon_wrap"><em class="nav_item_icon"></em></div>
+                <div class="nav_item_icon_wrap"><em class="nav_item_icon_up"></em></div>
+                <span class="nav_item_text">公司位置</span>
+            </div>
+            <!-- 为了挡住顶部和底部的灰线 -->
+            <span class="nav_vline nav_vline_top"></span>
+            <span class="nav_vline nav_vline_bottom"></span>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+
+    var editor = new Simditor({
+        textarea: $('#editor'),
+        //optional options
+        placeholder: '请输入对公司的评价内容',
+        upload: false,
+        toolbar: true,
+    });
+
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(save-btn)', function (data) {
+
+            var uid = $('#uid').val();
+
+            if(uid == '') {
+                layer.msg('请先登录后，提交评论！');
+                setTimeout(function () {
+                    window.location.href = '/login';
+                    return;
+                },1500);
+            } else {
+                $.ajax({
+                    type : 'post',
+                    url : '/gongsi',
+                    data : data.field,
+                    dataType : 'json',
+                    success : function (data) {
+                        if(data.status) {
+                            $('#editor').val('');
+                            $('.simditor-body').children().remove();
+                            $('.simditor-placeholder').css('display','block');
+                            layer.msg(data.msg, {icon: 1, time: 1500});
+                        } else {
+                            layer.msg(data.msg, {icon: 2, time: 1500});
+                        }
+                    },
+                    error: function () {
+                        layer.msg('aJax执行失败!');
+                    }
+                });
+            }
+            return false;
+        });
+
+    });
+
+</script>
+
+{/block}

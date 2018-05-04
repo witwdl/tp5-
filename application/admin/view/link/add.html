@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>新增友情链接</title>
+    {css href="/static/admin/assets/libs/layui/css/layui.css"}
+</head>
+<body>
+
+<div class="layui-container" style="margin-top: 20px;">
+    <div class="layui-fluid">
+        <div class="layui-col-md12">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">友链名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required  lay-verify="required"  placeholder="请输入友链名称" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">友链地址</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="url" required  lay-verify="required" placeholder="请加上http://或https://" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">是否展示</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="isshow" value="1" title="展示" checked>
+                        <input type="radio" name="isshow" value="0" title="隐藏">
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-block">
+                        <textarea name="remark" placeholder="备注内容请勿超过三十个字" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="save-btn">立刻提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{js href="/static/admin/assets/libs/jquery/jquery-1.11.1.min.js"}
+{js href="/static/admin/assets/libs/layui/layui.all.js"}
+<script>
+
+
+
+    layui.use('form', function () {
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(save-btn)', function (data) {
+
+            var index = parent.layer.getFrameIndex(window.name);
+
+            $.ajax({
+                type : 'post',
+                url : '/link',
+                data : data.field,
+                dataType : 'json',
+                success : function (data) {
+                    if(data.status) {
+                        parent.layer.msg(data.msg, {icon: 1, time: 1500});
+                    } else {
+                        parent.layer.msg(data.msg, {icon: 2, time: 1500});
+                    }
+                    //关闭iframe
+                    setTimeout(function(){
+                        parent.location.reload();
+                        parent.layer.close(index);
+                    },2000);
+            },
+                error: function () {
+                    layer.msg('aJax执行失败!');
+                }
+            });
+
+        return false;
+        });
+    });
+</script>
+</body>
+</html>
+

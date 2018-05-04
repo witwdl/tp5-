@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑评论</title>
+    {css href="/static/admin/assets/libs/layui/css/layui.css"}
+</head>
+<body>
+
+<div class="layui-container" style="margin-top: 20px;">
+    <div class="layui-fluid">
+        <div class="layui-col-md12">
+            <form class="layui-form">
+                <!--<input type="hidden" name="id" value="{$data['id']}">-->
+                <div class="layui-form-item">
+                    <label class="layui-form-label">评论状态</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="status" value="1" title="已审核" {$data['status'] == 1 ? 'checked' : ''}>
+                        <input type="radio" name="status" value="0" title="未审核" {$data['status'] == 0 ? 'checked' : ''}>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">评论内容</label>
+                    <div class="layui-input-block">
+                        <textarea name="comment" placeholder="请输入内容" class="layui-textarea">{$data.comment}</textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="update-btn">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{js href="/static/admin/assets/libs/jquery/jquery-1.11.1.min.js"}
+{js href="/static/admin/assets/libs/layui/layui.all.js"}
+<script>
+
+
+
+    layui.use('form', function () {
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(update-btn)', function (data) {
+
+            var index = parent.layer.getFrameIndex(window.name);
+
+            $.ajax({
+                type : 'put',
+                url : '/comment/' + {$data.id},
+                data : data.field,
+                dataType : 'json',
+                success : function (data) {
+                    if(data.status) {
+                        parent.layer.msg(data.msg, {icon: 1, time: 1500});
+                    } else {
+                        parent.layer.msg(data.msg, {icon: 2, time: 1500});
+                    }
+                    //关闭iframe
+                    setTimeout(function(){
+                        parent.location.reload();
+                        parent.layer.close(index);
+                    },2000);
+            },
+                error: function () {
+                    layer.msg('aJax执行失败!');
+                }
+            });
+
+        return false;
+        });
+    });
+</script>
+</body>
+</html>
+

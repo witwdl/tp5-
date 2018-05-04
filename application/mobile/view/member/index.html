@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>法力兔招聘网-个人中心</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+    <style>
+        header  {
+            background: rgba(79,176,140,1) !important;
+        }
+        header h1 {
+            color: #fff !important;
+        }
+
+        .login_head {
+            height: 40px;
+            line-height: 40px;
+        }
+
+        .login_head .left {
+            float: left;
+            font-size: 16px;
+        }
+        .login_head .right {
+            float: right;
+        }
+        .login_head .right a {
+            position: absolute;
+            right: 15px;
+            top: 7px;
+            display: block;
+            float: right;
+            background-color: #f5f5f5;
+            padding: 0 20px;
+            height: 30px;
+            line-height: 30px;
+            margin-top: 6px;
+            color: #00b38a;
+            border-radius: 15px;
+            font-size: 15px;
+        }
+
+        .list {
+            margin-left: 2px;
+            border-top: 1px solid #ccc;
+            list-style: none;
+            font-size: 12px;
+        }
+        .list .item-img {
+            float: left;
+            margin:15px 0;
+        }
+        .list .item-desc {
+            position: relative;
+            height: 85px;
+
+        }
+        .list .item-desc .item-title {
+            position: absolute;
+            top: -8px;
+        }
+        .list .item-desc .item-pos {
+            position: absolute;
+            top: 40px;
+        }
+        .list .item-desc .item-time {
+            position: absolute;
+            top: 50px;
+        }
+        .list .item-desc .item-salary {
+            position: absolute;
+            top: 33px;
+            font-size: 15px;
+            color: rgba(79,176,140,1);
+            right: -10px;
+        }
+        .headicon {
+            height: 81px;
+            width: 81px;
+            margin: 30px auto 0px;
+            -webkit-border-radius: 40.5px;
+            -moz-border-radius: 40.5px;
+            border-radius: 40.5px;
+            -moz-background-clip: padding;
+            -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+            overflow: hidden;
+            background-color: #f6f6f6;
+        }
+        .headicon .headpic {
+            width: 72px;
+            height: 72px;
+            margin: 4px 0 0 4px;
+            -webkit-border-radius: 36px;
+            -moz-border-radius: 36px;
+            border-radius: 36px;
+            -moz-background-clip: padding;
+            -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+        }
+        .username,.phone,.email{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header class="bar bar-nav">
+    <h1 class='title'>个人中心</h1>
+</header>
+<nav class="bar bar-tab">
+    <a class="tab-item external active" href="{:url('mobile/index/index')}">
+        <span class="icon icon-home"></span>
+        <span class="tab-label">职位</span>
+    </a>
+    <a class="tab-item external" href="{:url('mobile/member/index')}">
+        <span class="icon icon-me"></span>
+        <span class="tab-label">我的</span>
+    </a>
+</nav>
+<div class="content">
+    <!-- 这里是页面内容区 -->
+    <div class="row">
+        <div class="col-100">
+            <div class="headicon">
+                <img src="/static/mobile/images/default_headpic.png" class="headpic">
+            </div>
+        </div>
+        <div class="col-100 username">
+            <p>{$data['username']}</p>
+        </div>
+        <div class="col-50 phone">{$data['phone']}</div>
+        <div class="col-50 email">{$data['email']}</div>
+    </div>
+
+    <div class="content-block" style="padding-left:15px;margin-top: 50px;">
+        <p><a style="border: none;background: #50B08B;color: #fff;" id="create-btn" href="{:url('mobile/index/logout')}" class="button button-big">退出登录</a></p>
+    </div>
+</div>
+
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+
+<script>
+    $('.list').click(function(){
+        var jid = $(this).attr('data-read');
+        window.location.href="/mobile/" + jid;
+    });
+</script>
+
+</body>
+</html>

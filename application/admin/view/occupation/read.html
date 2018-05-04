@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>查看职位信息</title>
+    {css href="/static/admin/assets/libs/layui/css/layui.css"}
+    <style>
+        body,div,.layui-container {margin: 0; padding: 0;color:#fff;}
+        .layui-container {width:100%;background: #5FB878;height: 120px;}
+        .logo {width: 80px;height: 80px;}
+        a {font: #fff; font-size: 12px}
+        img {padding: 20px;}
+    </style>
+</head>
+<body>
+<div class="layui-container title">
+    <div class="layui-row" style="color: #333;">
+        <div class="layui-col-md12">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="">
+                    <col width="">
+                    <col>
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td>职位名称</td>
+                    <td>{$data['title']}</td>
+                </tr>
+                <tr>
+                    <td>职位薪资</td>
+                    <td>{$data['pay']}</td>
+                </tr>
+                <tr>
+                    <td>工作年限</td>
+                    <td>{$data['age']}</td>
+                </tr>
+                <tr>
+                    <td>要求学历</td>
+                    <td>{$data['education']}</td>
+                </tr>
+                <tr>
+                    <td>职位诱惑</td>
+                    <td>{$data['lure']}</td>
+                </tr>
+                <tr>
+                    <td>职位描述</td>
+                    <td>{$data['content']}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{js href="/static/admin/assets/libs/jquery/jquery-1.11.1.min.js"}
+{js href="/static/admin/assets/libs/layui/layui.all.js"}
+</body>
+</html>
+

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>个人简历</title>
+    {css href="/static/admin/assets/libs/layui/css/layui.css"}
+    {css href="/static/assets/css/bootstrap.min.css"}
+    {css href="/static/admin/resume/css/read.css"}
+</head>
+<body>
+
+<div class="layui-container">
+    <div class="layui-row">
+
+        <div class="layui-col-xs4 layui-col-xs-offset4" style="text-align: center" >
+            <img src="/uploads/20180105/44c9edb5066ce53c5c8098585aaeab00.jpg" alt="" class="img_picture">
+        </div>
+
+    </div>
+    <div class="layui-row" >
+        <div class="layui-col-xs4 layui-col-xs-offset4" style="text-align: center;padding: 10px " >
+            <h2>{$result.name}</h2>
+        </div>
+    </div>
+
+    <div class="layui-row">
+
+        <div class="layui-col-xs8 layui-col-xs-offset2 ">
+            <div class="layui-row">
+                <div class="layui-col-xs8 layui-col-xs-offset2" style="text-align: center;padding: 10px ">
+                   <span>
+                      <i class="layui-icon">&#xe68e;</i>
+                       <em>{$data.school}</em>
+                       <em>{$data.profession}</em>
+                   </span>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-xs8 layui-col-xs-offset2" style="text-align: center;padding: 10px ">
+                   <span>
+                      <i class="glyphicon glyphicon-user"></i>
+
+
+                       <em>{$result.age}</em>
+                       <em>/</em>
+                       <em>{$data.background}</em>
+                       <em>/</em>
+                       <em>{$result.work_date}</em>
+                   </span>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-xs8 layui-col-xs-offset2" style="text-align: center ;padding: 10px ">
+                   <span>
+                      <i class="glyphicon glyphicon-earphone"></i>
+                       <em>{$result.phone}</em>
+                   </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-row" >
+        <div class="layui-col-xs4 layui-col-xs-offset4" style="text-align: center;padding: 10px " >
+            <h2>工作经历</h2>
+        </div>
+    </div>
+    {volist name= 'work' id='v'}
+    <div class="layui-row">
+
+        <div class="layui-col-xs8 layui-col-xs-offset2 ">
+            <div class="layui-row">
+                <div class="layui-col-xs8 " style="tpadding: 10px ">
+                   <span>
+                       <em>{$v.company}</em>
+                   </span>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-xs6 " style="padding: 10px ">
+                   <span>
+                       <em>{$v.position}</em>
+                   </span>
+                </div>
+                <div class="layui-col-xs6 " style="padding: 10px ">
+                   <span>
+                       <em>{$v.workdate}</em>
+                   </span>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    {/volist}
+    <div class="layui-row" >
+        <div class="layui-col-xs4 layui-col-xs-offset4" style="text-align: center;padding: 10px " >
+            <h2>教育经历</h2>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-col-xs8 layui-col-xs-offset2 ">
+            <div class="layui-row">
+                <div class="layui-col-xs8 " style="tpadding: 10px ">
+                   <span>
+                       <em>{$data.school}</em>
+                   </span>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-xs6 " style="padding: 10px ">
+                   <span>
+                       <em>{$data.profession}</em>
+                   </span>
+                </div>
+                <div class="layui-col-xs6 " style="padding: 10px ">
+                   <span>
+                       <em>{$data.graduation_date}毕业</em>
+                   </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{js href="/static/admin/assets/libs/jquery/jquery-1.11.1.min.js"}
+{js href="/static/admin/assets/libs/layui/layui.all.js"}
+<script>
+
+
+
+
+</script>
+</body>
+</html>
+

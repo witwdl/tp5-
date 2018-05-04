@@ -1,0 +1,163 @@
+{extend name="main/index" /}
+{block name="main"}
+<!-- Start right content -->
+<div class="content-page">
+    <!-- ============================================================== -->
+    <!-- Start Content here -->
+    <!-- ============================================================== -->
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="widget">
+                    <div class="widget-header transparent">
+                        <h2><strong>评论</strong> 列表</h2>
+                        <div class="additional-btn">
+                            <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                            <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+                            <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="data-table-toolbar">
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table data-sortable class="table table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>评论内容</th>
+                                    <th>评论时间</th>
+                                    <th>评论状态</th>
+                                    <th data-sortable="false">操作</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {volist name="list" id="v"}
+                                <tr>
+                                    <td>{$v.id}</td>
+                                    <td title="{$v.comment}" data-toggle="tooltip">{:mb_substr(strip_tags($v.comment),0,35).'...'}</td>
+                                    <td>{$v.create_time}</td>
+                                    <td>
+                                        {switch name="v.status" }
+                                        {case value="1" break="1"}<span class="label label-success">已审核</span>{/case}
+                                        {case value="0"}<span class="label label-danger">未审核</span>{/case}
+                                        {default /}<span class="label label-info">未知错误</span>
+                                        {/switch}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-xs">
+                                            <a data-toggle="tooltip" title="审核" data-id="{$v['id']}" data-status="{$v['status']}" class="btn status-btn btn-default"><i class="fa fa-unlock-alt"></i></a>
+                                            <a data-toggle="tooltip" title="编辑" data-id="{$v['id']}"  class="btn btn-default edit-btn"><i class="fa fa-edit"></i></a>
+                                            <a data-toggle="tooltip" title="删除" class="btn btn-default del-btn" data-id="{$v['id']}"><i class="fa fa-times"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {/volist}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="data-table-toolbar">
+                                {$list->render()}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- End Content here -->
+</div>
+
+<script>
+
+    $(function () {
+
+        $('.edit-btn').click(function(){
+            var id = $(this).attr('data-id');
+
+            //iframe层-父子操作
+            layer.open({
+                title : '编辑评论',
+                type: 2,
+                area: ['700px', '550px'],
+                fixed: false, //不固定
+                maxmin: true,
+                content: '/comment/'+ id +'/edit'
+            });
+        });
+
+
+        $('.status-btn').click(function () {
+            var id = $(this).attr('data-id');
+            var status = $(this).attr('data-status');
+            var _this = $(this);
+            var span = $(this).parents('td').prev('td').children('span');
+
+            $.ajax({
+                type: 'get',
+                url: '/comment/' + status + '/' + id,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.status) {
+                        span.attr('class', 'label label-success');
+                        span.text('已审核');
+                        _this.attr('disabled', 'disabled');
+                        layer.msg(data.msg, {icon: 1, time: 1500});
+                    } else {
+                        _this.attr('disabled', 'disabled');
+                        layer.msg(data.msg, {icon: 2, time: 1500});
+                    }
+                },
+                error: function () {
+                    layer.msg('aJax执行失败!');
+                }
+            });
+
+        });
+
+
+        $('.del-btn').click(function () {
+            //获取用户ID
+            var id = $(this).attr('data-id');
+            var tr = $(this).parents('tr');
+            //询问框
+            var index = layer.confirm('您确认要删除该评论吗？', {
+                btn: ['确认', '取消'], //按钮
+                title: '提示',
+                icon: 7,
+            }, function () {
+                layer.close(index);
+                delAjax(id, tr);
+            });
+        });
+    });
+
+    // 执行AJAX删除
+    function delAjax(id, tr) {
+        $.ajax({
+            type: 'delete',
+            url: '/comment/' + id,
+            dataType: 'json',
+            success: function (data) {
+                if (data.status) {
+                    tr.remove();
+                    layer.msg(data.info, {icon: 1, time: 1500});
+                } else {
+                    layer.msg(data.msg, {icon: 2, time: 1500});
+                }
+            },
+            error: function () {
+                alert('AJAX执行失败!');
+            }
+        });
+    }
+
+
+</script>
+
+{/block}

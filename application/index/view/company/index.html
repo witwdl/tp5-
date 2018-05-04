@@ -1,0 +1,97 @@
+{extend name="index/index" /}
+{block name="main"}
+<!-- 顶部banner -->
+<!--[if lt IE 9]>
+<style type="text/css">.panel .panel_cont .panel_det{filter:alpha(opacity=0)}.panel .panel_cont .panel_det .go_btn{filter:alpha(opacity=0)}.panel.hover .panel_cont{filter:alpha(opacity=95)}.panel.hover .panel_cont .panel_det{filter:alpha(opacity=100)}.panel.hover .panel_cont .panel_det .go_btn{filter:alpha(opacity=100)}</style>
+<![endif]-->
+<div id="banner" class="company_banner" data-lg-tj-track-code="gongsi_banner" data-lg-tj-track-type="1">
+    <div class="banner_bg">
+        <img src="/static/index/gongsi/picture/cgp3o1iq07carchgaadvkjlyjbo764.jpg" width="100%" height="389">
+    </div>
+
+    <div class="banner_content">
+        <h3>什么值得投</h3>
+        <div id="it_content" class="it_content">
+            <div class="it_list">
+                <ul class="panel_list">
+                    {volist name="hotlist" id="v"}
+                    <li>
+                        <div class="panel">
+                            <img src="/uploads/companylogo/{$v['img_url']}" alt="{$v['name']}logo" width="142" height="142" />
+                            <p class="panel_b">{$v['name']}</p>
+                            <div class="panel_cont">
+                                <div class="panel_det">
+                                    <p>{$v['intro']}</p>
+                                    <div><a class="go_btn tj_exposure" href="{:url('index/company/read',['id'=>$v['id']])}" target="_blank" data-lg-tj-id="7y00" data-lg-tj-no="
+                                                                    0001
+                                                            " data-lg-tj-cid="23998">进入公司主页</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="time">{$v.create_time}</div>
+                    </li>
+                    {/volist}
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 页面主体START -->
+<div id="content-container">
+    <div id="company_list_container">
+
+
+        <!-- 分站城市 -->
+
+        <!-- 公司列表 -->
+        <div id="company_list" data-lg-tj-track-code="gongsi_list">
+            <ul class="item_con_list">
+                {volist name="list" id="v"}
+                <li class="company-item">
+                    <div class="top">
+                        <p><a href="{:url('index/company/read',['id'=>$v['id']])}" target="_blank" data-lg-tj-id="8100" data-lg-tj-no="0101" data-lg-tj-cid="58635"><img src="/uploads/companylogo/{$v['img_url']}" alt="公司logo" width="80" height="80"></a></p>
+                        <p class="company-name wordCut"><a href="{:url('index/company/read',['id'=>$v['id']])}" target="_blank" title="即刻" data-lg-tj-id="8200" data-lg-tj-no="0101" data-lg-tj-cid="58635">{$v['name']}</a></p>
+                        <p class="indus-stage wordCut">{$v['tid']}/{$v['financing']}</p>
+                        <p class="advantage wordCut">{$v['intro']}</p>
+                    </div>
+                    <div class="bottom clearfix">
+                        <a class="bottom-item bottom-1 fl" href="" target="_blank">
+                            <p class="green">16</p>
+                            <p class="gray">面试评价</p>
+                        </a>
+                        <a class="bottom-item bottom-2 fl" href="" target="_blank">
+                            <p class="green">15</p>
+                            <p class="gray">在招职位</p>
+                        </a>
+                        <a class="bottom-item bottom-3 fl" href="" target="_blank">
+                            <p class="green">97%</p>
+                            <p class="gray">简历处理率</p>
+                        </a>
+                    </div>
+                </li>
+                {/volist}
+            </ul>
+            <!-- 分页 -->
+            <div>
+                {$list->render()}
+            </div>
+
+        </div>
+
+
+        <script id="empty-list" type="text/html">
+            <div class="empty_position">
+                <div class="pic"></div>
+                <div class="txt">
+                    <div>暂时没有符合该筛选条件的公司</div>
+                    <span>请重新修改筛选条件再进行筛选</span>
+                </div>
+            </div>
+        </script>
+
+    </div>
+</div>
+<!-- 页面主体END -->
+{/block}

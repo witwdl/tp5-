@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>新增企业信息</title>
+    {css href="/static/admin/assets/libs/layui/css/layui.css"}
+    {css href="/static/admin/assets/libs/font-awesome/css/font-awesome.min.css"}
+</head>
+<body>
+<div class="layui-container" style="margin-top: 20px;">
+    <div class="layui-fluid">
+        <div class="layui-col-md12">
+            <form class="layui-form">
+                <div class="layui-form-item" style="height: 80px;line-height: 80px;">
+                    <label style="height: 80px;line-height: 80px;" class="layui-form-label">企业图标</label>
+                    <img src="/static/admin/images/company/logo.jpg" width="80" height="80" class="companylogo" style="float: right;border: 1px solid #eee;">
+                    <button class="layui-btn img_upload">
+                        <i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;&nbsp;上传图片
+                    </button>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">企业名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="name" required lay-verify="required" placeholder="请输入公司名称(非公司全名称)" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">企业网址</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="link" required lay-verify="required" placeholder="请以www开头,无需添加http协议" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">融资阶段</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="financing" value="1" title="未融资" checked>
+                        <input type="radio" name="financing" value="2" title="天使轮">
+                        <input type="radio" name="financing" value="3" title="A轮">
+                        <input type="radio" name="financing" value="4" title="B轮">
+                        <input type="radio" name="financing" value="5" title="C轮">
+                        <input type="radio" name="financing" value="6" title="D轮及以上">
+                        <input type="radio" name="financing" value="7" title="上市公司">
+                        <input type="radio" name="financing" value="8" title="不需要融资">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">企业规模</label>
+                    <div class="layui-input-block">
+                        <select name="scale" lay-verify="required">
+                            <option value="">请选泽公司规模</option>
+                            <option value="1">0-15人</option>
+                            <option value="2">15-50人</option>
+                            <option value="3">50-100人</option>
+                            <option value="4">100-200人</option>
+                            <option value="5">200-500人</option>
+                            <option value="6">500人以上</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">所属行业</label>
+                    <div class="layui-input-block">
+                        <input type="radio"  value="1" name="tid" title="移动互联网" checked>
+                        <input type="radio"  value="2" name="tid" title="电子商务">
+                        <input type="radio"  value="3" name="tid" title="金融">
+                        <input type="radio"  value="4" name="tid" title="企业服务">
+                        <input type="radio"  value="5" name="tid" title="教育">
+                        <input type="radio"  value="6" name="tid" title="文化娱乐">
+                        <input type="radio"  value="7" name="tid" title="游戏">
+                        <input type="radio"  value="8" name="tid" title="O2O">
+                        <input type="radio"  value="9" name="tid" title="硬件">
+                        <input type="radio"  value="10" name="tid" title="医疗健康">
+                        <input type="radio"  value="11" name="tid" title="生活服务">
+                        <input type="radio"  value="12" name="tid" title="广告营销">
+                        <input type="radio"  value="13" name="tid" title="旅游">
+                        <input type="radio"  value="14" name="tid" title="数据服务">
+                        <input type="radio"  value="15" name="tid" title="社交网络">
+                        <input type="radio"  value="16" name="tid" title="分类信息">
+                        <input type="radio"  value="17" name="tid" title="信息安全">
+                        <input type="radio"  value="18" name="tid" title="招聘">
+                        <input type="radio"  value="19" name="tid" title="其他">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">公司地址</label>
+                    <div class="layui-inline">
+                        <select name="province" lay-filter="pro" lay-verify="required">
+                            <option value="">请选择一个省份</option>
+                            {volist name="province" id="v"}
+                            <option value="{$v.id}">{$v.name}</option>
+                            {/volist}
+                        </select>
+                    </div>
+                    <div class="layui-inline">
+                        <select name="city" lay-filter="city" id="city" lay-verify="required"></select>
+                    </div>
+                    <div class="layui-inline">
+                        <select name="county" lay-filter="county" id="county" lay-verify="required"></select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">详细地址</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="address" required lay-verify="required" placeholder="请填写详细地址" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">企业简介</label>
+                    <div class="layui-input-block">
+                        <textarea name="intro" placeholder="控制在40字以内,用于前台展示slogan" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="save-btn">立刻提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{js href="/static/admin/assets/libs/jquery/jquery-1.11.1.min.js"}
+{js href="/static/admin/assets/libs/layui/layui.all.js"}
+
+<script>
+
+    //企业logo上传
+    layui.use('upload', function () {
+        var upload = layui.upload;
+
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '.img_upload' //绑定元素
+            , url: '/company' //上传接口
+            , method: 'post'
+            , accept: 'images'   //允许文件的类型
+            , size: 200 //最大允许上传文件的大小  KB
+            , field: 'img_url'
+            , done: function (res) {
+                //上传完毕回调
+                if (res.code) {
+                    $('.companylogo').attr('src', '/uploads/companylogo/' + res.data.src);
+                    $('.layui-form').append('<input type="hidden" name="img_url" value="' + res.data.src + '" >');
+                    layer.msg(res.msg, {icon: 1, time: 1500});
+                } else {
+                    layer.msg(res.msg, {icon: 2, time: 1500});
+                }
+            }
+        });
+    });
+
+    //insert company info
+    layui.use('form', function () {
+        var form = layui.form;
+
+        // 查询城市和区域数据
+        form.on('select()', function (data) {
+            var upid = data.value;
+            var selectParent = $(data.elem).parent('.layui-inline');
+
+            $.ajax({
+                type: 'post',
+                url: '/admin/company/selectInfo',
+                dataType: 'json',
+                data: {'upid': upid},
+                success: function (data) {
+                    // 循环插入option前清空数据
+                    selectParent.nextAll().children('select').empty();
+
+                    if (upid == '') {
+                        return;
+                    }
+
+                    if (data == '') {
+                        selectParent.nextAll().hide();
+                    } else {
+                        selectParent.nextAll().show();
+                    }
+
+                    //循环得到的city数据
+                    for (var i = 0; i < data.length; i++) {
+                        selectParent.next().children('select').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+                    }
+
+
+                    //重新渲染表单select
+                    form.render('select');
+
+                },
+                error: function () {
+                    layer.msg('aJax执行失败!', {icon: 2, time: 1500});
+                }
+            });
+        });
+
+        //监听提交
+        form.on('submit(save-btn)', function (data) {
+
+            var index = parent.layer.getFrameIndex(window.name);
+
+            $.ajax({
+                type: 'post',
+                url: '/company',
+                data: data.field,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.status) {
+                        parent.layer.msg(data.msg, {icon: 1, time: 1500});
+                    } else {
+                        parent.layer.msg(data.msg, {icon: 2, time: 1500});
+                    }
+                    //关闭iframe
+                    setTimeout(function () {
+                        parent.location.reload();
+                        parent.layer.close(index);
+                    }, 2000);
+                },
+                error: function () {
+                    layer.msg('aJax执行失败!', {icon: 2, time: 1500});
+                }
+            });
+
+            return false;
+        });
+
+    });
+
+</script>
+</body>
+</html>
+

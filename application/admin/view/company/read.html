@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>查看企业信息</title>
+    {css href="/static/admin/assets/libs/layui/css/layui.css"}
+    <style>
+        body,div,.layui-container {margin: 0; padding: 0;color:#fff;}
+        .layui-container {width:100%;background: #5FB878;height: 120px;}
+        .logo {width: 80px;height: 80px;}
+        a {font: #fff; font-size: 12px}
+        img {padding: 20px;}
+    </style>
+</head>
+<body>
+<div class="layui-container title">
+    <div class="layui-row" style="height: 120px;">
+        <div class="layui-col-md4 logo">
+            <img src="/uploads/companylogo/{$data['img_url']}" alt="" width="80">
+        </div>
+        <div class="layui-col-md8" style="height: 120px;">
+            <div class="left" style="float: left;">
+                <h1 style="position:absolute;top: 30px;left: 40px;">{$data['name']}</h1>
+            </div>
+            <div class="right" style="position: relative;">
+                <p style="position: absolute; top: 76px;left: 40px;">{$data['intro']}</p>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" style="color: #333;">
+        <div class="layui-col-md12">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="">
+                    <col width="">
+                    <col>
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td>企业官网</td>
+                    <td>{$data['link']}</td>
+                </tr>
+                <tr>
+                    <td>加入时间</td>
+                    <td>{$data['create_time']}</td>
+                </tr>
+                <tr>
+                    <td>更新时间</td>
+                    <td>{$data['update_time']}</td>
+                </tr>
+                <tr>
+                    <td>企业规模</td>
+                    <td>{$data['update_time']}</td>
+                </tr>
+                <tr>
+                    <td>融资阶段</td>
+                    <td>{$data['financing']}</td>
+                </tr>
+                <tr>
+                    <td>企业地址</td>
+                    <td>{$data['address']}</td>
+                </tr>
+                <tr>
+                    <td>企业简介</td>
+                    <td>{$data['intro']}</td>
+                </tr>
+                <tr>
+                    <td>是否删除</td>
+                    <td>{$data['active']}</td>
+                </tr>
+                <tr>
+                    <td>是否审核公司资质</td>
+                    <td>{$data['approve']}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{js href="/static/admin/assets/libs/jquery/jquery-1.11.1.min.js"}
+{js href="/static/admin/assets/libs/layui/layui.all.js"}
+</body>
+</html>
+

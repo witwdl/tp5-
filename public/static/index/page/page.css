@@ -1,0 +1,8 @@
+.pagination {padding:10px 0; text-align:center;float: left;clear: left;position: absolute;
+    left: 600px;}
+.pagination span,.pagination a{ border-radius:3px; border:1px solid #dfdfdf;display:inline-block; padding:5px 12px;}
+.pagination li{ margin:0 3px; float: left;}
+.pagination span.current{ background:#09F; color:#FFF; border-color:#09F; margin:0 2px;}
+.pagination a:hover{background:#09F; color:#FFF; border-color:#09F; }
+.pagination label{ padding-left:15px; color:#999;}
+.pagination label b{color:red; font-weight:normal; margin:0 3px;}

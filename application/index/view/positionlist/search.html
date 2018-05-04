@@ -1,0 +1,198 @@
+{extend name="index/index" /}
+{block name="main"}
+    <!-- 页面主体START -->
+<div id="content-container">
+    <div class="search-wrapper " style="height: 70px;">
+        <div id="searchBar" class="search-bar">
+            <div class="input-wrapper" data-lg-tj-track-code="search_search" data-lg-tj-track-type="1" style="margin-left: 110px">
+                <form action="{:url('index/position/search')}">
+                <div class="keyword-wrapper">
+
+                    <input type="text" id="keyword" autocomplete="off" maxlength="64" placeholder="搜索职位、公司或地点" name="search" />
+                </div>
+                    <input  type="button" id="submit" value="搜索"/>
+                </form>
+            </div>
+        </div>
+    </div>
+        <!-- 搜索输入框模块 -->
+        <div id="main_container">
+        <!-- 左侧 -->
+         <div class="content_left">
+                <!-- 依次填入左侧各个模块 -->
+                <!--当前为公司标签时，隐藏筛选条件栏-->
+        <div id="positionHead" class="">
+            <ul id="filterBox" class="filter-wrapper">
+        <input id="filterOption" type="hidden" value="1">
+        <li class="li-taller brief dn" id="filterBrief">
+            <span class="title">工作地点：</span>
+            <a rel="nofollow" href="javascript:;" class="active">全国</a>
+            <span class="title">工作经验：</span>
+            <a rel="nofollow" href="javascript:;" class="active">不限</a>
+            <span class="title">学历要求：</span>
+            <a rel="nofollow" href="javascript:;" class="active">不限</a>
+            <span class="title">融资阶段：</span>
+            <a rel="nofollow" href="javascript:;" class="active">不限</a>
+            <span class="title">行业领域：</span>
+            <a rel="nofollow" href="javascript:;" class="active">不限</a>
+        </li>
+
+        <div class="details" id="filterCollapse">
+        <div class="has-more">
+            <div class="more more-positions workPosition">
+                <li class="hot">
+                    <span class="title">工作地点：</span>
+                    <a rel="nofollow" href="javascript:;" class="active" data-lg-tj-id="8p00" data-lg-tj-no="0001" data-lg-tj-cid="idnull" data-id="">全国</a>
+                    <a rel="nofollow" href="javascript:;" data-lg-tj-id="8p00" data-lg-tj-no="0002" data-lg-tj-cid="idnull" data-id="5" class="more-city-name">北京</a>
+                    <a rel="nofollow" href="javascript:;" data-lg-tj-id="8p00" data-lg-tj-no="0003" data-lg-tj-cid="idnull" data-id="6" class="more-city-name">上海</a>
+                    <a rel="nofollow" href="javascript:;" data-lg-tj-id="8p00" data-lg-tj-no="0004" data-lg-tj-cid="idnull" data-id="765" class="more-city-name">深圳</a>
+                    <a rel="nofollow" href="javascript:;" data-lg-tj-id="8p00" data-lg-tj-no="0005" data-lg-tj-cid="idnull" data-id="763" class="more-city-name">广州</a>
+                    <a rel="nofollow" href="javascript:;" data-lg-tj-id="8p00" data-lg-tj-no="0006" data-lg-tj-cid="idnull" data-id="653" class="more-city-name">杭州</a>
+                    <a rel="nofollow" href="javascript:;" data-lg-tj-id="8p00" data-lg-tj-no="0007" data-lg-tj-cid="idnull" data-id="801" class="more-city-name">成都</a>
+                    <a rel="nofollow" href="javascript:;" data-lg-tj-id="8p00" data-lg-tj-no="0008" data-lg-tj-cid="idnull" data-id="635" class="more-city-name">南京</a>
+                    <a rel="nofollow" href="javascript:;" data-lg-tj-id="8p00" data-lg-tj-no="0009" data-lg-tj-cid="idnull" data-id="736" class="more-city-name">武汉</a>
+                    <a rel="nofollow" href="javascript:;" data-lg-tj-id="8p00" data-lg-tj-no="0010" data-lg-tj-cid="idnull" data-id="854" class="more-city-name">西安</a>
+                    <a rel="nofollow" href="javascript:;" data-lg-tj-id="8p00" data-lg-tj-no="0011" data-lg-tj-cid="idnull" data-id="682" class="more-city-name">厦门</a>
+                    <a rel="nofollow" href="javascript:;" data-lg-tj-id="8p00" data-lg-tj-no="0012" data-lg-tj-cid="idnull" data-id="749" class="more-city-name">长沙</a>
+                    <a rel="nofollow" href="javascript:;" data-lg-tj-id="8p00" data-lg-tj-no="0013" data-lg-tj-cid="idnull" data-id="639" class="more-city-name">苏州</a>
+                    <a rel="nofollow" href="javascript:;" data-lg-tj-id="8p00" data-lg-tj-no="0014" data-lg-tj-cid="idnull" data-id="7" class="more-city-name">天津</a>
+                </li>
+            </div>
+        </div>
+                <li class="multi-chosen"><span class="title">工作经验：</span>
+                <a rel="nofollow" href="javascript:;" class="active" data-lg-tj-id=8r00 data-lg-tj-no="0001" data-lg-tj-cid="idnull">不限
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id=8r00 data-lg-tj-no="0002" data-lg-tj-cid="idnull">应届毕业生
+                    <i class="delete"></i>
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id=8r00 data-lg-tj-no="0003" data-lg-tj-cid="idnull">3年及以下
+                    <i class="delete"></i>
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id=8r00 data-lg-tj-no="0004" data-lg-tj-cid="idnull">3-5年
+                    <i class="delete"></i>
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id=8r00 data-lg-tj-no="0005" data-lg-tj-cid="idnull">5-10年
+                    <i class="delete"></i>
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id=8r00 data-lg-tj-no="0006" data-lg-tj-cid="idnull">10年以上
+                        <i class="delete"></i>
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id=8r00 data-lg-tj-no="0007" data-lg-tj-cid="idnull">不要求
+                    <i class="delete"></i>
+                </a>
+            </li>
+
+                <li class="multi-chosen"><span class="title">学历要求：</span>
+                <a rel="nofollow" href="javascript:;" class="active" data-lg-tj-id="8s00" data-lg-tj-no=" 0001" data-lg-tj-cid="idnull">不限
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="0002" data-lg-tj-cid="idnull">大专
+                    <i class="delete"></i>
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="0003" data-lg-tj-cid="idnull">本科
+                    <i class="delete"></i>
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="0004" data-lg-tj-cid="idnull">硕士
+                    <i class="delete"></i>
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="0005" data-lg-tj-cid="idnull">博士
+                    <i class="delete"></i>
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="0006" data-lg-tj-cid="idnull">不要求
+                    <i class="delete"></i>
+                </a>
+            </li>
+                <li class="multi-chosen"><span class="title">融资阶段：</span>
+                <a rel="nofollow" href="javascript:;" class="active" data-lg-tj-id="8t00" data-lg-tj-no="0001" data-lg-tj-cid="idnull">不限
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8t00" data-lg-tj-no="0002" data-lg-tj-cid="idnull">未融资
+                    <i class="delete"></i>
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8t00" data-lg-tj-no="0003" data-lg-tj-cid="idnull">天使轮
+                    <i class="delete"></i>
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8t00" data-lg-tj-no="0004" data-lg-tj-cid="idnull">A轮
+                    <i class="delete"></i>
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8t00" data-lg-tj-no="0005" data-lg-tj-cid="idnull">B轮
+                    <i class="delete"></i>
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8t00" data-lg-tj-no="0006" data-lg-tj-cid="idnull">C轮
+                    <i class="delete"></i>
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8t00" data-lg-tj-no="0007" data-lg-tj-cid="idnull">D轮及以上
+                    <i class="delete"></i>
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8t00" data-lg-tj-no="0008" data-lg-tj-cid="idnull">上市公司
+                    <i class="delete"></i>
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8t00" data-lg-tj-no="0009" data-lg-tj-cid="idnull">不需要融资
+                    <i class="delete"></i>
+                </a>
+            </li>
+            <div class="has-more hy-area">
+                <li class="multi-chosen">
+                    <span class="title">行业领域：</span>
+                    {volist name='trade' id= 'v'}
+
+                    <a rel="nofollow" href="{:url('index/position/trade',$v.id)}" data-lg-tj-id="8u00" data-lg-tj-no="0002" data-lg-tj-cid="idnull">{$v.name}
+                        <i class="delete"></i>
+
+                        {/volist}
+                </li>
+            </div>
+        </div>
+    </ul>
+
+        </div>
+
+
+    <!-- 职位列表 -->
+    <div class="s_position_list " id="s_position_list">
+    <!-- 切换分站 -->
+
+        <ul class="item_con_list">
+            {volist name="position" id="v"}
+                <li class="con_list_item default_list" data-index="0" data-positionid="2346495" data-salary="13k-18k" data-company="泛微" data-positionname="PHP" data-companyid="24995" data-hrid="2805917" data-adword="0">
+                    <div class="list_item_top">
+                        <div class="position">
+                            <div class="p_top">
+                                <a class="position_link" href="{:url('index/position/read',['id'=>$v['id']])}" target="_blank" data-index="0" data-lg-tj-id="8E00"
+                                data-lg-tj-no="0101" data-lg-tj-cid="2346495" data-lg-tj-abt="dm-csearch-useUserInterest|0">
+                                    <h3>{$v.title}</h3>
+                                <span class="format-time">&ensp;{:date('Y-m-d',$v.createtime)}发布]&ensp;</span>
+                                </a>
+                            </div>
+                            <div class="p_bot">
+                                <div class="li_b_l">
+                                    <span class="money">{$v.pay}</span>
+                                    <!--<i></i>-->经验{$v.age} / {$v.education}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="company">
+                            <div class="company_name">
+                                <a href=" {:url('index/company/read',['id'=>$v['id']])}" target="_blank" data-lg-tj-id="8F00" data-lg-tj-no="0101" data-lg-tj-cid="24995" data-lg-tj-abt="dm-csearch-useUserInterest|0">{$v.company.name}</a>
+                            </div>
+                            <div class="industry">
+                                {$v.company.trade.name} / {$v.company.financing}
+                            </div>
+                        </div>
+                        <div class="com_logo">
+                            <a href="javascript:;" target="_blank" data-lg-tj-id="8G00" data-lg-tj-no="0101" data-lg-tj-cid="24995" data-lg-tj-abt="dm-csearch-useUserInterest|0"><img src="/uploads/companylogo/{$v.company.img_url}" alt="{$v.company.name}" width="60" height="60"></a>
+                        </div>
+                    </div>
+                    <div class="list_item_bot">
+                        <div class="li_b_l">
+                    <div class="li_b_r">“{$v.lure}”</div>
+                    </div>
+                    </div>
+                </li>
+            {/volist}
+        </ul>
+</div>
+            {/block}
+    </div>
+    </div>
+</div>
+    <!-- 页面主体END -->
+

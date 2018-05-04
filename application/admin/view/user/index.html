@@ -1,0 +1,134 @@
+{extend name="main/index" /}
+{block name="main"}
+<!-- Start right content -->
+<div class="content-page">
+    <!-- ============================================================== -->
+    <!-- Start Content here -->
+    <!-- ============================================================== -->
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="widget">
+                    <div class="widget-header transparent">
+                        <h2><strong>管理员</strong> 列表</h2>
+                        <div class="additional-btn">
+                            <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                            <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+                            <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="data-table-toolbar">
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="toolbar-btn-action">
+                                        <a href="{:url('admin/user/create')}" class="btn btn-success"><i class="fa fa-plus-circle"></i>新增</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table data-sortable class="table table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>管理员账号</th>
+                                    <th>管理员名称</th>
+                                    <th>状态</th>
+                                    <th>所属角色</th>
+                                    <th data-sortable="false">操作</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {volist name="list" id="v"}
+                                <tr>
+                                    <td>{$v.id}</td>
+                                    <td><strong>{$v.username}</strong></td>
+                                    <td>{$v.name}</td>
+                                    <td>
+                                        {switch name="v.active" }
+                                        {case value="1" break="1"}<span class="label label-success">激活</span>{/case}
+                                        {case value="0"}<span class="label label-danger">禁用</span>{/case}
+                                        {default /}<span class="label label-info">未知错误</span>
+                                        {/switch}
+                                    </td>
+                                    <td>
+                                        {volist name="v.role" id="j"}
+                                            {$j[0]['name'].','}
+                                        {/volist}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-xs">
+                                            <a href="{:url('admin/user/active',['id'=>$v['id'],'active'=>$v['active']])}" data-toggle="tooltip" title="禁用" class="btn btn-default"><i
+                                                    class="fa fa-unlock-alt"></i></a>
+                                            <a href="{:url('admin/user/edit',['id'=>$v['id']])}" data-toggle="tooltip" title="编辑" class="btn btn-default"><i
+                                                    class="fa fa-edit"></i></a>
+                                            <a data-toggle="tooltip" title="删除" class="btn btn-default del-btn" data-id="{$v['id']}"><i
+                                                    class="fa fa-times"></i></a>
+                                            <a href="{:url('admin/user/role',['id'=>$v['id']])}" data-toggle="tooltip" title="角色分配" class="btn btn-default"><i
+                                                    class="fa fa-cog"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {/volist}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="data-table-toolbar">
+                            <!--分页-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- End Content here -->
+</div>
+
+<script>
+
+
+    $(function() {
+        $('.del-btn').click(function(){
+            //获取用户ID
+            var id = $(this).attr('data-id');
+            var tr = $(this).parents('tr');
+            //询问框
+            var index = layer.confirm('您确认要删除该管理员吗？', {
+                btn: ['确认','取消'], //按钮
+                title : '提示',
+                icon : 7,
+            }, function(){
+                layer.close(index);
+                delAjax(id,tr);
+            });
+        });
+    });
+
+    // 执行AJAX删除
+    function delAjax(id, tr) {
+        $.ajax({
+            type: 'delete',
+            url: '/user/' + id,
+            dataType : 'json',
+            success : function (data){
+                if (data.status) {
+                    tr.remove();
+                    layer.msg(data.info,{icon:1,time:1500});
+                } else {
+                    layer.msg(data.msg,{icon:2,time:1500});
+                }
+            },
+            error : function () {
+                alert('AJAX执行失败!');
+            }
+        });
+    }
+
+</script>
+
+{/block}

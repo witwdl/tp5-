@@ -1,0 +1,144 @@
+{extend name="main/index" /}
+{block name="main"}
+<!-- Start right content -->
+<div class="content-page">
+    <!-- ============================================================== -->
+    <!-- Start Content here -->
+    <!-- ============================================================== -->
+    <div class="content">
+        <!-- Your awesome content goes here -->
+        <div class="row">
+
+            <div class="col-sm-12 portlets">
+
+                <div class="widget">
+                    <div class="widget-header transparent">
+                        <h2><strong>添加</strong> 企业用户</h2>
+                        <div class="additional-btn">
+                            <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                            <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+                            <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
+                        </div>
+                    </div>
+                    <div class="widget-content padding">
+                        <div id="basic-form">
+                            <form role="form" action="{:url('admin/company/save')}" enctype="multipart/form-data" method="post" >
+                                <div class="form-group">
+                                    <label for="name">企业名</label>
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="企业名">
+                                </div>
+                                <div class="form-group">
+                                    <label for="mname">企业网站</label>
+                                    <input type="text" name="link" class="form-control" id="level" >
+                                </div>
+                                <div class="form-group">
+                                    <label for="aname">地址</label>
+                                    <select class="form-control" id="pro" name="province"></select>
+                                    <select class="form-control" id="city" name="city"></select>
+                                    <select class="form-control" id="area" name="county"></select>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="mname">企业详细地址</label>
+                                    <input type="text" name="address" class="form-control"  >
+                                </div>
+                                <div class="form-group">
+                                    <label for="aname">企业规模</label>
+                                    <select class="form-control"  name="scale">
+                                        <option value="1">低于15人</option>
+                                        <option value="2">15-50人</option>
+                                        <option value="3">50-100人</option>
+                                        <option value="4">100-200人</option>
+                                        <option value="5">200-500人</option>
+                                        <option value="6">500人以上</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="mname">企业LOGO</label>
+                                    <input type="file" name="img_url" class="form-control" />
+                                </div>
+                                <button type="submit" class="btn btn-success">添加</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End content here -->
+    <!-- ============================================================== -->
+
+</div>
+
+<script>
+
+    // 请求省份信息
+    $.ajax({
+        type: 'get',
+        url: '/address/index/',
+        dataType: 'json',
+        async : false, //同步执行
+        success : function (data) {
+            // console.log(data);
+            // 先清空之前的数据
+            $('#pro').empty();
+            // 遍历省份数据
+            for (var i = 0; i < data.length; i++) {
+                $('<option value="'+data[i].id+'">'+data[i].name+'</option>').appendTo('#pro');
+            }
+        },
+        error : function () {
+            alert('AJAX执行失败');
+        }
+    });
+
+
+    // 绑定change事件
+    $('#pro,#city,#area').change(function(){
+        // 清空之后所有的option选项
+        $(this).nextAll('select').show().empty();
+        // 获取当前的value值
+        var upid = $(this).val();
+        // console.log(upid);
+        // console.log($(this));
+        var _this = $(this);
+
+        // 请求下一级数据
+        $.ajax({
+            type: 'get',
+            url: '/address/index/',
+            data: 'upid='+upid,
+            dataType: 'json',
+            success : function (data) {
+                if (!data) {
+                    _this.nextAll('select').hide();
+                    return;
+                }
+                // console.log(data);
+                // console.log($(this).constructor);
+                // console.log(_this);
+                // 填充下一级数据
+                for (var i = 0; i < data.length; i++) {
+                    $('<option value="'+data[i].id+'">'+data[i].name+'</option>').appendTo(_this.next('select'));
+                }
+                // 自动触发后续change事件
+                _this.next('select').trigger('change');
+            },
+            error : function () {
+                alert('AJAX执行失败');
+            }
+        });
+    });
+
+    //主动加载数据
+    $('#pro').trigger('change');
+
+
+</script>
+<!-- End right content -->
+{/block}

@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+
+    <meta content="法力兔, falitu, 法力兔招聘, 招聘, 互联网招聘, 法力兔互联网招聘, 移动互联网招聘, 垂直互联网招聘, 微信招聘, 微博招聘, 法力兔官网, 法力兔百科, 跳槽, 高薪职位, 互联网圈子, IT招聘, 职场招聘, 猎头招聘,O2O招聘, LBS招聘, 社交招聘, 校园招聘, 校招,社会招聘,社招"
+          name="keywords">
+
+    <meta content="法力兔是互联网领域垂直招聘网站" name="description">
+
+    <title>找工作-互联网招聘求职网-法力兔招招聘网</title>
+
+    <link rel="Shortcut Icon" href="/favicon.ico">
+
+    <!-- header/global_domain FE_base.. -->
+
+    <!-- H5	 -->
+    <!--[if lt IE 9]>
+    <script src="/static/login/js/html5shiv.min.js"></script>
+    <script src="/static/login/js/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/static/login/css/main.html_aio_c425276.css"/>
+</head>
+
+<body>
+<input type="hidden" value="" id="isVisiable_request_form_verifyCode"/>
+<!-- 页面主体START -->
+<header class="sso_header">
+    <a href="{:url('index/index')}" class="logo" style="top: 50px;width: 180px;height: 150px;"></a>
+</header>
+<section class="content_box cleafix">
+    <div class="left_area fl">
+        <div class="form_head">
+            <ul class="form_head clearfix">
+                <li class="active" data-lg-tj-id="1Us0" data-lg-tj-no="idnull" data-lg-tj-cid="idnull">
+                    邮箱登录
+                </li>
+                <li data-lg-tj-id="1Ut0" data-lg-tj-no="idnull" data-lg-tj-cid="idnull">
+                    手机快捷登录
+                </li>
+            </ul>
+            <span class="tab_active"></span>
+        </div>
+
+        <div class="form_body" data-view="passwordLogin">
+            <form class="active" action="{:url('index/login/login')}" method="post">
+                <div class="input_item clearfix">
+                    <input type="text" class="input input_white" name="email" placeholder="请输入电子邮箱" required
+                           autocomplete="off">
+                </div>
+                <div class="input_item clearfix">
+                    <input type="password" class="input input_white" name="password" placeholder="请输入密码" required
+                           autocomplete="off">
+                </div>
+                <div class="input_item clearfix">
+                    <label for="remember" style="line-height: 21px;position:absolute;top: -5px;">
+                        <input type="checkbox" name="remember" id="remember" value="1"> 保存登录状态
+                    </label>
+                    <a rel="nofollow" href="{:url('index/login/reset')}" class="forgot_pwd">忘记密码？</a>
+                </div>
+                <div class="input_item btn_group clearfix">
+                    <input type="submit" class="btn btn_green btn_active btn_block btn_lg" value="登&nbsp;录">
+                </div>
+            </form>
+        </div>
+        <div class="form_body" data-view="codeLogin">
+            <form action="{:url('index/login/login')}" method="post">
+                <div class="input_item clearfix">
+                    <!--
+@require "pc/modules/country-code/main.js"
+@require "pc/modules/country-code/main.less"
+<!---->
+                    <input type="text" class="input input_white" id="phone" name="phone" maxlength="11" required
+                           placeholder="请输入手机号" autocomplete="off">
+                </div>
+                <div class="input_item clearfix">
+                    <div class="input_group clearfix">
+                        <input type="text" class="input input_white verify_code_input fl" id="code" name="code"
+                               maxlength="4"
+                               required style="float: left;padding-right: 0px;" placeholder="请证明你不是坏人(✿◡‿◡)"
+                               autocomplete="off">
+                        <img src="{:url('login/code')}" alt="点击重试"
+                             onclick="this.src='{:url('login/code')}'+'?'+Math.random()" width="98" height="39"
+                             style="outline: none;height: 44px;width: 100px;float: right;position: absolute;right: 0;top:-3px;cursor: pointer;z-index: 1;">
+                    </div>
+                </div>
+                <div class="input_item">
+                    <div class="input_group clearfix">
+                        <input type="text" class="input input_white first_child" name="smscode" maxlength="4" required
+                               placeholder="请输入验证码" autocomplete="off">
+                        <input type="button" id="btn" onclick="sendSmsCode()" class="btn btn_active last_child"
+                               value="获取验证码">
+                    </div>
+                </div>
+
+                <div class="input_item clearfix">
+                    <label for="remember-1" style="line-height: 21px;position:absolute;top: -5px;">
+                        <input type="checkbox" name="remember" id="remember-1" value="1"> 保存登录状态
+                    </label>
+                    <a rel="nofollow" href="{:url('index/login/reset')}" class="forgot_pwd">忘记密码？</a>
+                </div>
+
+                <div class="input_item btn_group clearfix">
+                    <input type="submit" class="btn btn_green btn_active btn_block btn_lg" value="登&nbsp;录">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="divider fl"></div>
+    <div class="right_area fl">
+        <h5>还没有帐号:</h5>
+        <a href="{:url('index/register/index')}" class="register_now">立即注册</a>
+        <h5>使用以下帐号直接登录:</h5>
+        <ul class="vender_login clearfix">
+            <li>
+                <a rel="nofollow"
+                   href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101453770&redirect_uri=http://www.falitu.com/qqlogin"
+                   title="使用腾讯QQ帐号登录" class="vender_icon icon_tencent" target="_blank" data-lg-tj-id="1jc0"
+                   data-lg-tj-no="idnull" data-lg-tj-cid="idnull"></a>
+            </li>
+            <li>
+                <a rel="nofollow" href="https://passport.lagou.com/oauth20/auth_weixinProvider.html"
+                   class="vender_icon icon_wechat" title="使用微信帐号登录" target="_blank" data-lg-tj-id="1jd0"
+                   data-lg-tj-no="idnull" data-lg-tj-cid="idnull"></a>
+            </li>
+        </ul>
+    </div>
+</section>
+
+{js href="/static/index/js/jquery.min.js"}
+{js href="/static/admin/assets/js/layer.js"}
+<script type="text/javascript" src="/static/login/js/vendor_c7a7c93.js"></script>
+<script type="text/javascript" src="/static/login/js/main.html_aio_71fb1b1.js"></script>
+<script type="text/javascript" src="/static/login/js/static_6cd46b7.js"></script>
+<script type="text/javascript">
+    //login page
+    require(['pc/page/login/main']);
+
+    var countdown = 60;
+
+    function sendSmsCode() {
+        var obj = $("#btn");
+        var tel = $("#phone").val();
+        var code = $("#code").val();
+
+
+        if (tel == '' || code == '') {
+            layer.msg('手机号和验证码不能为空');
+            return;
+        }
+
+        settime(obj);
+
+        $.ajax({
+            type: 'get',
+            url: '/send/' + tel,
+            dataType: 'json',
+            success: function (data) {
+                if (data.statusCode == '000000') {
+                    layer.msg('短信发送成功！');
+                } else {
+                    layer.msg(data.statusMsg);
+                }
+            },
+            error: function () {
+                layer.msg('aJax执行失败!');
+            }
+        });
+    }
+
+    function settime(obj) { //发送验证码倒计时
+        if (countdown == 0) {
+            obj.remoteAttr('disabled');
+            obj.val("重新获取验证码");
+            countdown = 60;
+            return;
+        } else {
+            obj.attr('disabled', true);
+            obj.val("重新发送(" + countdown + ")");
+            countdown--;
+        }
+        setTimeout(function () {
+                settime(obj)
+            }
+            , 1000)
+    }
+
+</script>
+<script src="/static/login/js/track.js" type="text/javascript"></script>
+</body>
+</html>

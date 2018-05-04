@@ -1,0 +1,398 @@
+{extend name="main/index" /}
+{block name="main"}
+<!-- Start right content -->
+<div class="content-page">
+    <!-- ============================================================== -->
+    <!-- Start Content here -->
+    <!-- ============================================================== -->
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="widget">
+                    <div class="widget-header transparent">
+                        <h2><strong>轮播图</strong> 列表</h2>
+                        <div class="additional-btn">
+                            <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                            <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+                            <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="data-table-toolbar">
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="toolbar-btn-action">
+                                        <a data-toggle="modal" class="btn btn-success" href="#modal-form" id="addshowform">添加轮播图</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table data-sortable class="table table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID</th>
+                                    <!--<th style="width: 30px" data-sortable="false">-->
+                                    <!--<input type="checkbox" class="rows-check"></th>-->
+                                    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;轮播图标题</th>
+                                    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;轮播图片</th>
+                                    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;显示/隐藏</th>
+                                    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;创建时间</th>
+                                    <th data-sortable="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;操作</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {volist name="bannerlist" id="banner"}
+                                <tr class="banneritem" data-id="{$banner.id}">
+                                    <td class="project-status" style="text-align: center;">
+                                        <span class="btn btn-success">{$banner.id}</span>
+                                    </td>
+                                    <td class="project-title" style="text-align: center;">
+                                        <a href="#modal-edit-form" class="lookbanner" data-url="{:url('admin/banner/lookbanner')}" data-toggle="modal" data-id="{$banner.id}">
+                                            {$banner.title}
+                                        </a>
+                                    </td>
+                                    <td class="project-completion" style="text-align: center;">
+                                        <img src="{$banner.img}" width="100" alt="">
+
+                                    </td>
+                                    <td class="project-people" style="text-align: center;">
+                                        {if condition="$banner.isdisplay == 1"} 显示
+                                        {else/} 隐藏
+                                        {/if}
+                                    </td>
+                                    <td class="project-people" style="text-align: center;">
+                                        {:date('Y-m-d H:i:s', $banner.createtime)}
+                                    </td>
+                                    <td class="btn-group btn-group-xs" style="text-align: center;">
+                                        {if condition="$banner.isdisplay eq 1"}
+                                        <a href="javascript:;" data-id="{$banner.id}" class="btn btn-default changestatus" data-url="{:url('admin/banner/changestatus')}" data-toggle="tooltip" data-op="hide" title="隐藏" ><i class="fa fa-unlock-alt"></i> </a>
+                                        {else/}
+                                        <a href="javascript:;" data-id="{$banner.id}" class="btn btn-default changestatus" data-url="{:url('admin/banner/changestatus')}" data-toggle="tooltip"  data-op="show" title="显示"><i class="fa fa-unlock-alt"></i> </a>
+                                        {/if}
+                                        <a href="#modal-edit-form" data-id="{$banner.id}" class="btn btn-default lookbanner" data-url="{:url('admin/banner/lookbanner')}"  data-toggle="modal" title="编辑"><i class="fa fa-edit"></i> </a>
+                                        <a href="javascript:void(0)" data-id="{$banner.id}" data-url="{:url('admin/banner/delete')}" class="btn btn-default delbanner" data-toggle="tooltip" title="删除"><i class="fa fa-trash-o"></i>  </a>
+                                    </td>
+                                </tr>
+                                {/volist}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="data-table-toolbar">
+                            {$bannerlist->render()}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- End Content here -->
+</div>
+
+<div id="modal-form" class="modal fade " aria-hidden="true">
+    <div class="modal-dialog" style="width:40%;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 ">
+                        <h3 class="m-t-none m-b">轮播图操作</h3>
+                        <p>首页大图显示</p>
+                        <form role="form" enctype="multipart/form-data" method="post" id="addForm">
+                            <div class="form-group">
+                                <label>轮播标题 :</label>
+                                <input type="text" placeholder="请输入轮播标题" name="title" class="form-control">
+                            </div>
+                            <div class="form-group" style="position: relative;overflow: hidden;padding-top: 10px">
+                                <label>轮播图片 :</label>
+                                <input type="file" name="img" class="addupimg" data-url="{:url('admin/banner/addupimg')}"  id="addupimg" style="position: absolute;z-index: -1">
+                                <a class="btn btn-success addupbtn" style="margin-left: 10px;">上传</a>
+                                <img src="" width="200" class="addshowimg" id="addshowimg" height="85" alt="">
+                            </div>
+                            <div class="form-group">
+                                <label>链接地址 :</label>
+                                <input type="text" placeholder="请输入链接地址" name="links" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>是否显示 :</label>
+                                <span><label style="font-weight:500;cursor: pointer;"><input type="radio" name="isdisplay" value="1" checked> 显示 </label></span>
+                                <span><label style="font-weight:500;cursor: pointer;"><input type="radio" name="isdisplay" value="2"> 隐藏 </label></span>
+                            </div>
+                            <div>
+                                <a href="javascript:;" class="btn btn-sm btn-success pull-right addbtn" id="addbtn" data-url="{:url('admin/banner/save')}" style="margin-right: 10px;" >添加</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal-edit-form" class="modal fade " aria-hidden="true">
+    <div class="modal-dialog" style="width:40%;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 ">
+                        <h3 class="m-t-none m-b">轮播图操作</h3>
+                        <p>首页大图显示</p>
+                        <form role="form" method="post" enctype="multipart/form-data"  id="editForm">
+                            <div class="form-group">
+                                <label>轮播标题 :</label>
+                                <input type="text" placeholder="请输入轮播标题" name="title" class="form-control uptitle">
+                            </div>
+                            <div class="form-group" style="position: relative;overflow: hidden;padding-top: 10px">
+                                <label>轮播图片 :</label>
+                                <img  width="200" class="upshowimg" id="upshowimg" height="85" alt="">
+                                <input type="file" name="img" class="editupimg" style="position: absolute;z-index: -1" data-url="{:url('admin/banner/editupimg')}" id="editupimg">
+                                <a class="btn btn-sm btn-success editupbtn" style="margin-left: 10px;">上传</a>
+                            </div>
+                            <div class="form-group">
+                                <label>链接地址 :</label>
+                                <input type="text" placeholder="请输入链接地址" name="links" class="form-control uplinks">
+                            </div>
+                            <div>
+                                <a href="javascript:;" class="btn btn-sm btn-success pull-right  editbtn" id="editbtn" data-url="{:url('admin/banner/update')}" style="margin-right: 10px;" >修改</a>
+                            </div>
+                            <input type="hidden" name="bannerid" class="bannerid">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function(){
+        $('.delbanner').click(function(){
+            var banneritem = $(this).parents('.banneritem');
+            var url = $(this).attr('data-url');
+            var id = $(this).attr('data-id');
+            layer.msg('您确定删除该轮播图嘛？', {
+                time: 0, //不自动关闭
+                btn: ['确定', '取消'],
+                yes:function(index){
+                    layer.close(index);
+                    layer.load(1);
+                    setTimeout(function(){
+                        layer.closeAll('loading');
+                        $.ajax({
+                            type : 'get',
+                            url : url,
+                            data : {'id':id},
+                            dataType : 'json',
+                            success : function(data){
+                                if (data.status == 1) {
+                                    layer.msg(data.info,{
+                                        icon: data.status,time:1500
+                                    },function(){
+                                        banneritem.remove();
+                                    });
+                                } else if (data.status == '2') {
+                                    layer.msg(data.info,{
+                                        icon: data.status,time:1500
+                                    });
+                                } else {
+                                    layer.msg('操作失败',{
+                                        icon: 2,time:1500
+                                    });
+                                }
+                            }
+                        });
+                    }, 2000);
+                }
+            });
+        });
+        $('.changestatus').click(function(){
+            var banneritem = $(this).parents('.banneritem');
+            var op = $(this).attr('data-op');
+            var url = $(this).attr('data-url');
+            var id = $(this).attr('data-id');
+            layer.msg('您确定改变该状态嘛？', {
+                time: 0, //不自动关闭
+                btn: ['确定', '取消'],
+                yes:function(index){
+                    layer.close(index);
+                    layer.load(1);
+                    setTimeout(function(){
+                        layer.closeAll('loading');
+                        $.ajax({
+                            type : 'get',
+                            url : url,
+                            data : {'id':id, 'op':op},
+                            dataType : 'json',
+                            success : function(data){
+                                if (data.status == 1) {
+                                    if (op == 'show') {
+                                        banneritem.find('td:nth-child(4)').html('显示');
+                                        banneritem.find('.changestatus').attr('data-op', 'hide');
+                                        banneritem.find('.changestatus span').html('隐藏');
+                                    } else {
+                                        banneritem.find('td:nth-child(4)').html('隐藏');
+                                        banneritem.find('.changestatus').attr('data-op', 'show');
+                                        banneritem.find('.changestatus span').html('显示');
+                                    }
+                                } else {
+                                    layer.msg('操作失败',{
+                                        icon: 2,time:1500
+                                    });
+                                }
+                            }
+                        });
+                    }, 2000);
+                }
+            });
+        });
+        $('.editbtn').click(function(){
+            var dataForm = new FormData($('#editForm')[0]);
+            dataForm.append('file',$(':file')[1].files[0]);
+            var url = $(this).attr('data-url');
+            $.ajax({
+                type : 'post',
+                url : url,
+                data : dataForm,
+                dataType : 'json',
+                contentType: false,
+                processData: false,
+                success : function(data){
+                    if (data.status == '1') {
+                        layer.msg(data.info,{
+                            icon: data.status,time:1500
+                        },function(){
+                            $('#table-data tr.banneritem').each(function(){
+                                if ($(this).attr('data-id') == data.id) {
+                                    $(this).find('td:nth-child(2)').find('a').html(data.title);
+                                    $(this).find('td:nth-child(3)').find('img').attr('src',data.img);
+                                }
+                            });
+                        });
+                    } else if (data.status == '2') {
+                        layer.msg(data.info,{
+                            icon: data.status,time:1500
+                        });
+                    } else {
+                        layer.msg('操作失败',{
+                            icon: 2,time:1500
+                        });
+                    }
+                }
+            });
+        });
+        $('.editupimg').change(function(){
+            readAsDataURL();
+        });
+        $('body').delegate('.lookbanner', 'click', function(){
+            var url = $(this).attr('data-url');
+            var id = $(this).attr('data-id');
+            $('#editForm')[0].reset();
+            $.ajax({
+                type : 'get',
+                url : url,
+                data : {'id':id},
+                dataType : 'json',
+                success : function(data){
+                    if (data.status == 1) {
+                        $('#editForm').find('.uptitle').val(data.info.title);
+                        $('#editForm').find('.upshowimg').attr('src', data.info.img);
+                        $('#editForm').find('.uplinks').val(data.info.links);
+                        $('.bannerid').val(data.info.id);
+                    } else {
+                        layer.msg('操作失败',{
+                            icon: 2,time:1500
+                        });
+                    }
+                }
+            });
+        });
+        $('.addupimg').change(function(){
+            $('#addshowimg').css('display', 'inline-block');
+            readDataURL();
+        });
+        $('#addshowform').click(function(){
+            $('#addForm')[0].reset();
+            $('#addshowimg').css('display', 'none');
+        });
+        $('.addupbtn').click(function(){
+            $('.addupimg').click();
+        });
+        $('.editupbtn').click(function(){
+            $('.editupimg').click();
+        });
+        $('.addbtn').click(function(){
+            var dataForm = new FormData($('#addForm')[0]);
+            dataForm.append('file',$(':file')[0].files[0]);
+            var url = $(this).attr('data-url');
+            $.ajax({
+                type : 'post',
+                url : url,
+                data : dataForm,
+                dataType : 'json',
+                contentType: false,
+                processData: false,
+                success : function(data){
+                    if (data.status == '1') {
+                        layer.msg(data.info,{
+                            icon: data.status,time:1500
+                        },function(){
+                            window.location.reload();
+                        });
+                    } else if (data.status == '2') {
+                        layer.msg(data.info,{
+                            icon: data.status,time:1500
+                        });
+                    } else {
+                        layer.msg('操作失败',{
+                            icon: 2,time:1500
+                        });
+                    }
+                }
+            });
+        });
+        function readAsDataURL(){
+            //检验是否为图像文件
+            var file = document.getElementById("editupimg").files[0];
+            if(!/image\/\w+/.test(file.type)){
+                layer.msg('请上传图片',{
+                    icon: 3,time:1500
+                });
+                return false;
+            }else{
+                var reader = new FileReader();
+                //将文件以Data URL形式读入页面
+                reader.readAsDataURL(file);
+                reader.onload=function(e){
+                    var result=document.getElementById("upshowimg");
+                    //显示文件
+                    result.src= this.result;
+                }
+            }
+        }
+        function readDataURL(){
+            //检验是否为图像文件
+            var file = document.getElementById("addupimg").files[0];
+            if(!/image\/\w+/.test(file.type)){
+                layer.msg('请上传图片',{
+                    icon: 3,time:1500
+                });
+                return false;
+            }else{
+                var reader = new FileReader();
+                //将文件以Data URL形式读入页面
+                reader.readAsDataURL(file);
+                reader.onload=function(e){
+                    var result=document.getElementById("addshowimg");
+                    //显示文件
+                    result.src= this.result;
+                }
+            }
+        }
+    });
+</script>
+<script src="/static/admin/assets/js/option.root.me.js"></script>
+{/block}

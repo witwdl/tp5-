@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>RBAC Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Base Css Files -->
+
+    <link href="/static/admin/assets/libs/jqueryui/ui-lightness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet"/>
+    <link href="/static/admin/assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/static/admin/assets/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="/static/admin/assets/libs/fontello/css/fontello.css" rel="stylesheet"/>
+    <link href="/static/admin/assets/libs/animate-css/animate.min.css" rel="stylesheet"/>
+    <link href="/static/admin/assets/libs/nifty-modal/css/component.css" rel="stylesheet"/>
+    <link href="/static/admin/assets/libs/magnific-popup/magnific-popup.css" rel="stylesheet"/>
+    <link href="/static/admin/assets/libs/ios7-switch/ios7-switch.css" rel="stylesheet"/>
+    <link href="/static/admin/assets/libs/pace/pace.css" rel="stylesheet"/>
+    <link href="/static/admin/assets/libs/sortable/sortable-theme-bootstrap.css" rel="stylesheet"/>
+    <link href="/static/admin/assets/libs/bootstrap-datepicker/css/datepicker.css" rel="stylesheet"/>
+    <link href="/static/admin/assets/libs/jquery-icheck/skins/all.css" rel="stylesheet"/>
+    <!-- Code Highlighter for Demo -->
+    <link href="/static/admin/assets/libs/prettify/github.css" rel="stylesheet"/>
+
+    <!-- Extra CSS Libraries Start -->
+    <link href="/static/admin/assets/libs/rickshaw/rickshaw.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/admin/assets/libs/morrischart/morris.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/admin/assets/libs/jquery-jvectormap/css/jquery-jvectormap-1.2.2.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="/static/admin/assets/libs/jquery-clock/clock.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/admin/assets/libs/bootstrap-calendar/css/bic_calendar.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/admin/assets/libs/sortable/sortable-theme-bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/admin/assets/libs/jquery-weather/simpleweather.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/admin/assets/libs/bootstrap-xeditable/css/bootstrap-editable.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="/static/admin/assets/css/style.css" rel="stylesheet" type="text/css"/>
+    <!-- Extra CSS Libraries End -->
+    <link href="/static/admin/assets/css/style-responsive.css" rel="stylesheet"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <!--<script src="/static/admin/assets/js/html5shiv.js"></script>-->
+    <!--<script src="/static/admin/assets/js/1.3.0/respond.min.js"></script>-->
+    <!--<![endif]&ndash;&gt;-->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/static/admin/assets/libs/jquery/jquery-1.11.1.min.js"></script>
+    <script src="/static/admin/assets/libs/bootstrap/js/bootstrap.min.js"></script>
+    <!-- include layer -->
+    <script src="/static/admin/assets/js/layer.js"></script>
+
+    <link rel="shortcut icon" href="/static/admin/assets/img/favicon.ico">
+</head>
+<body class="fixed-left">
+<!-- Modal Start -->
+<!-- Modal Task Progress -->
+<div class="md-modal md-3d-flip-vertical" id="task-progress">
+    <div class="md-content">
+        <h3><strong>RBAC Demo</strong></h3>
+        <div>
+            <p class="h2">小伙子,别瞎点。好好用你的系统！</p>
+            <p class="text-center">
+                <button class="btn btn-danger btn-lg md-close">关闭</button>
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Logout -->
+<div class="md-modal md-just-me" id="logout-modal">
+    <div class="md-content">
+        <h3><strong>登出</strong></h3>
+        <div>
+            <p class="text-center">
+                你确定要退出系统?
+                <br>
+                Are you sure want to logout from this Seeker Demo system?
+            </p>
+            <p class="text-center">
+                <button class="btn btn-primary md-close">我要返回</button>
+                <a href="{:url('admin/index/logout')}" class="btn btn-danger md-close">我要退出</a>
+            </p>
+        </div>
+    </div>
+</div><!-- Modal End -->
+
+<!-- Begin page -->
+<div id="wrapper">
+
+    <!-- Top Bar Start -->
+    <div class="topbar">
+        <div class="topbar-left">
+
+            <button class="button-menu-mobile open-left">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        <!-- Button mobile view to collapse sidebar menu -->
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="navbar-collapse2">
+
+                    <ul class="nav navbar-nav navbar-right top-navbar">
+
+                        <li class="dropdown iconify hide-phone"><a href="#" onclick="javascript:toggle_fullscreen()"><i
+                                class="icon-resize-full-2"></i></a></li>
+                        <li class="dropdown topbar-profile">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+                                    class="rounded-image topbar-profile-image"><img
+                                    src="/static/index/face/face.jpg"></span> {$username} <i
+                                    class="fa fa-caret-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li class="divider"></li>
+                                <li><a class="md-trigger" data-modal="logout-modal"><i class="icon-logout-1"></i>
+                                    登出系统</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    <!-- Top Bar End -->
+    <!-- Left Sidebar Start -->
+    <div class="left side-menu">
+        <div class="sidebar-inner slimscrollleft">
+            <!-- Search form -->
+            <div class="clearfix"></div>
+            <!--- Profile -->
+            <div class="profile-info">
+                <div class="col-xs-4">
+                    <a data-toggle="tooltip" title="See task progress" class="md-trigger" data-modal="task-progress"><img
+                            src="/static/index/face/face.jpg" class="img-responsive rounded-image profile-image"></a>
+                </div>
+                <div class="col-xs-8">
+                    <div class="profile-text">欢迎，<b>{$username}</b></div>
+                    <div class="profile-buttons">
+                        <a href="javascript:void(0)"><i class="fa fa-envelope-o pulse"></i></a>
+                        <a class="md-trigger" data-modal="logout-modal" title="Sign Out"><i
+                                class="fa fa-power-off text-red-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!--- Divider -->
+            <div class="clearfix"></div>
+            <hr class="divider"/>
+            <div class="clearfix"></div>
+            <!--- Divider -->
+            <div id="sidebar-menu">
+                <ul>
+                    <li class="has_sub user"><a href="javascript:void(0);"><i class="fa fa-user-secret"></i><span>用户管理</span>
+                        <span class="pull-right"><i class="fa fa-angle-down"></i></span></a>
+                        <ul>
+                            <li><a href="{:url('admin/user/index')}" class="active"><span>用户列表</span></a></li>
+                            <li><a href="{:url('admin/user/create')}"><span>添加用户</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="has_sub"><a href="javascript:void(0);"><i
+                            class="fa fa-users"></i><span>角色管理</span> <span class="pull-right"><i
+                            class="fa fa-angle-down"></i></span></a>
+                        <ul>
+                            <li><a href="{:url('admin/role/index')}"><span>角色列表</span></a></li>
+                            <li><a href="{:url('admin/role/create')}"><span>添加角色</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="has_sub"><a href="javascript:void(0);"><i
+                            class="fa fa-shield"></i><span>权限管理</span> <span class="pull-right"><i
+                            class="fa fa-angle-down"></i></span></a>
+                        <ul>
+                            <li><a href="{:url('admin/node/index')}"><span>权限列表</span></a></li>
+                            <li><a href="{:url('admin/node/create')}"><span>添加权限</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="has_sub"><a href="javascript:void(0);"><i
+                            class="fa fa-user-circle-o"></i><span>会员管理</span> <span class="pull-right"><i
+                            class="fa fa-angle-down"></i></span></a>
+                        <ul>
+                            <li><a href="{:url('admin/member/index')}"><span>会员列表</span></a></li>
+                            <li><a href="{:url('admin/member/create')}"><span>添加会员</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="has_sub"><a href="javascript:void(0);"><i
+                            class="fa fa-user-circle-o"></i><span>简历管理</span> <span class="pull-right"><i
+                            class="fa fa-angle-down"></i></span></a>
+                        <ul>
+                            <li><a href="{:url('admin/resume/index')}"><span>简历列表</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li class="has_sub"><a href="javascript:void(0);"><i
+                            class="icon-feather"></i><span>企业管理</span> <span class="pull-right"><i
+                            class="fa fa-angle-down"></i></span></a>
+                        <ul>
+                            <li><a href="{:url('admin/company/index')}"><span>企业列表</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li class="has_sub comment"><a href="javascript:void(0);"><i  class="fa fa-commenting-o"></i><span>评论管理</span> <span class="pull-right"><i
+                            class="fa fa-angle-down"></i></span></a>
+                        <ul>
+                            <li><a href="{:url('admin/comment/index')}"><span>评论列表</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="has_sub"><a href="javascript:void(0);"><i
+                            class="icon-link"></i><span>友情链接</span> <span class="pull-right"><i
+                            class="fa fa-angle-down"></i></span></a>
+                        <ul>
+                            <li><a href="{:url('admin/link/index')}"><span>友链列表</span></a></li>
+                            <li><a href="{:url('admin/link/create')}"><span>新增友链</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="has_sub"><a href="javascript:void(0);"><i
+                            class="fa fa-bars"></i><span>职位分类</span> <span class="pull-right"><i
+                            class="fa fa-angle-down"></i></span></a>
+                        <ul>
+                            <li><a href="{:url('admin/position/index')}"><span>分类列表</span></a></li>
+                            <li><a href="{:url('admin/position/create')}"><span>添加分类</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li class="has_sub"><a href="javascript:void(0);"><i
+                            class="icon-feather"></i><span>职业信息</span> <span class="pull-right"><i
+                            class="fa fa-angle-down"></i></span></a>
+                        <ul>
+                            <li><a href="{:url('admin/occupation/index')}"><span>信息列表</span></a></li>
+                        </ul>
+                    </li>
+                    <!--轮播图管理-->
+                    <li class="has_sub"><a href="javascript:void(0);"><i
+                            class="fa fa-picture-o"></i><span>轮播图管理</span> <span class="pull-right"><i
+                            class="fa fa-angle-down"></i></span></a>
+                        <ul>
+                            <li><a href="{:url('admin/banner/index')}"><span>轮播图列表</span></a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+            <br><br><br>
+        </div>
+    </div>
+    <!-- Left Sidebar End -->
+{block name="main"}
+    <!-- Start right content -->
+    <div class="content-page">
+        <!-- ============================================================== -->
+        <!-- Start Content here -->
+        <!-- ============================================================== -->
+        <div class="content">
+            <!-- Start info box -->
+            <div class="row top-summary">
+                <div class="col-lg-12 col-md-12" style="height:300px;" id="pie">
+
+                </div>
+
+            </div>
+            <!-- End of info box -->
+
+
+
+
+            <!-- Footer Start -->
+            <footer>
+                Huban Creative &copy; 2014
+                <div class="footer-links pull-right">
+                    <a href="#">About</a><a href="#">Support</a><a href="#">Terms of Service</a><a href="#">Legal</a><a
+                        href="#">Help</a><a href="#">Contact Us</a>
+                </div>
+            </footer>
+            <!-- Footer End -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End content here -->
+        <!-- ============================================================== -->
+
+    </div>
+    <!-- End right content -->
+
+</div>
+<div id="contextMenu" class="dropdown clearfix">
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"
+        style="display:block;position:static;margin-bottom:5px;">
+        <li><a tabindex="-1" href="javascript:void(0)" data-priority="high"><i class="fa fa-circle-o text-red-1"></i> High
+            Priority</a></li>
+        <li><a tabindex="-1" href="javascript:void(0)" data-priority="medium"><i class="fa fa-circle-o text-orange-3"></i>
+            Medium Priority</a></li>
+        <li><a tabindex="-1" href="javascript:void(0)" data-priority="low"><i class="fa fa-circle-o text-yellow-1"></i> Low
+            Priority</a></li>
+        <li><a tabindex="-1" href="javascript:void(0)" data-priority="none"><i class="fa fa-circle-o text-lightblue-1"></i>
+            None</a></li>
+    </ul>
+</div>
+<!-- End of page -->
+<!-- the overlay modal element -->
+<div class="md-overlay"></div>
+<!-- End of eoverlay modal -->
+<script src="/static/admin/index/build/dist/echarts-all.js"></script>
+
+<script>
+
+            var myChart = echarts.init(document.getElementById('pie'));
+
+
+            var option = {
+                title : {
+                    text: '用户数据',
+                    subtext: '统计',
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    orient : 'vertical',
+                    x : 'left',
+                    data:['用户数','激活用户数','绑定手机用户','绑定邮箱','绑定QQ用户']
+                },
+                toolbox: {
+                    show : true,
+                    feature : {
+                        mark : {show: false},
+                        dataView : {show: true, readOnly: false},
+                        magicType : {
+                            show: false,
+                            type: ['pie', 'funnel'],
+                            option: {
+                                funnel: {
+                                    x: '25%',
+                                    width: '50%',
+                                    funnelAlign: 'left',
+                                    max: 1548
+                                }
+                            }
+                        },
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                calculable : true,
+                series : [
+                    {
+                        name:'访问来源',
+                        type:'pie',
+                        radius : '55%',
+                        center: ['50%', '60%'],
+                        data:[
+                            {value:{$member}, name:'用户数'},
+                            {value:{$active}, name:'激活用户数'},
+                            {value:{$phone}, name:'绑定手机用户'},
+                            {value:{$email}, name:'绑定邮箱'},
+                            {value:{$openid}, name:'绑定QQ用户'}
+                        ]
+                    }
+                ]
+            };
+
+
+
+            myChart.setOption(option);
+
+
+</script>
+{/block}
+
+<script>
+    var resizefunc = [];
+</script>
+
+<script src="/static/admin/assets/libs/jqueryui/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="/static/admin/assets/libs/jquery-ui-touch/jquery.ui.touch-punch.min.js"></script>
+<script src="/static/admin/assets/libs/jquery-detectmobile/detect.js"></script>
+<script src="/static/admin/assets/libs/jquery-animate-numbers/jquery.animateNumbers.js"></script>
+<script src="/static/admin/assets/libs/ios7-switch/ios7.switch.js"></script>
+<script src="/static/admin/assets/libs/fastclick/fastclick.js"></script>
+<script src="/static/admin/assets/libs/jquery-blockui/jquery.blockUI.js"></script>
+<script src="/static/admin/assets/libs/bootstrap-bootbox/bootbox.min.js"></script>
+<script src="/static/admin/assets/libs/jquery-slimscroll/jquery.slimscroll.js"></script>
+<script src="/static/admin/assets/libs/jquery-sparkline/jquery-sparkline.js"></script>
+<script src="/static/admin/assets/libs/nifty-modal/js/classie.js"></script>
+<script src="/static/admin/assets/libs/nifty-modal/js/modalEffects.js"></script>
+<script src="/static/admin/assets/libs/sortable/sortable.min.js"></script>
+<script src="/static/admin/assets/libs/bootstrap-fileinput/bootstrap.file-input.js"></script>
+<script src="/static/admin/assets/libs/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="/static/admin/assets/libs/bootstrap-select2/select2.min.js"></script>
+<script src="/static/admin/assets/libs/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="/static/admin/assets/libs/pace/pace.min.js"></script>
+<script src="/static/admin/assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="/static/admin/assets/libs/jquery-icheck/icheck.min.js"></script>
+
+<!-- Demo Specific JS Libraries -->
+<script src="/static/admin/assets/libs/prettify/prettify.js"></script>
+
+<script src="/static/admin/assets/js/init.js"></script>
+<!-- Page Specific JS Libraries -->
+<script src="/static/admin/assets/libs/d3/d3.v3.js"></script>
+<script src="/static/admin/assets/libs/rickshaw/rickshaw.min.js"></script>
+<script src="/static/admin/assets/libs/raphael/raphael-min.js"></script>
+<script src="/static/admin/assets/libs/morrischart/morris.min.js"></script>
+<script src="/static/admin/assets/libs/jquery-knob/jquery.knob.js"></script>
+<script src="/static/admin/assets/libs/jquery-jvectormap/js/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="/static/admin/assets/libs/jquery-jvectormap/js/jquery-jvectormap-us-aea-en.js"></script>
+<script src="/static/admin/assets/libs/jquery-clock/clock.js"></script>
+<script src="/static/admin/assets/libs/jquery-easypiechart/jquery.easypiechart.min.js"></script>
+<script src="/static/admin/assets/libs/jquery-weather/jquery.simpleWeather-2.6.min.js"></script>
+<script src="/static/admin/assets/libs/bootstrap-xeditable/js/bootstrap-editable.min.js"></script>
+<script src="/static/admin/assets/libs/bootstrap-calendar/js/bic_calendar.min.js"></script>
+<script src="/static/admin/assets/js/apps/calculator.js"></script>
+<script src="/static/admin/assets/js/apps/todo.js"></script>
+<script src="/static/admin/assets/js/apps/notes.js"></script>
+<script src="/static/admin/assets/js/pages/index.js"></script>
+<script src="/static/admin/assets/js/pages/index.js"></script>
+</body>
+</html>

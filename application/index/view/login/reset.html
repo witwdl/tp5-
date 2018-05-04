@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+    <meta content="法力兔, falitu, 法力兔招聘, 招聘, 互联网招聘, 法力兔互联网招聘, 移动互联网招聘, 垂直互联网招聘, 微信招聘, 微博招聘, 法力兔官网, 法力兔百科, 跳槽, 高薪职位, 互联网圈子, IT招聘, 职场招聘, 猎头招聘,O2O招聘, LBS招聘, 社交招聘, 校园招聘, 校招,社会招聘,社招"
+          name="keywords">
+    <meta content="法力兔是互联网领域垂直招聘网站" name="description">
+    <title>找工作-互联网招聘求职网-法力兔招招聘网</title>
+
+    <link rel="Shortcut Icon" href="/favicon.ico">
+
+
+    <!-- H5	 -->
+    <!--[if lt IE 9]>
+    <script src="/static/reset/js/html5shiv.min.js"></script>
+    <script src="/static/reset/js/respond.min.js"></script>
+    <![endif]-->
+
+
+    <link rel="stylesheet" type="text/css" href="/static/reset/css/step1.html_aio_61da046.css"/>
+</head>
+<body>
+
+<!-- 页面主体START -->
+<header class="sso_header">
+    <a href="{:url('index/index')}" class="logo" style="top: 50px;width: 180px;height: 150px;"></a>
+</header>
+<section class="content_box" id="findPwd1">
+    <!-- 通过手机号找回密码 -->
+    <div class="findPwd">
+        <h5 class="change_way"><a rel="nofollow" href="{:url('index/login/index')}">返回登录</a><span
+                class="separate">|</span><a class="go_mail" rel="nofollow" href="{:url('index/login/ereset')}" id="go-mail">通过邮箱找回</a>
+        </h5>
+        <form id="myForm">
+            <ul class="form_head clearfix">
+                <li class="active fl">
+                    <span class="icon_step step1"></span>
+                    验证手机号
+                </li>
+                <li class="line fr">
+                    <span class="icon_step step2"></span>
+                    重置密码
+                </li>
+            </ul>
+            <div class="form_body" id="form-1" style="display: block;">
+                <div class="input_item clearfix">
+                    <input type="text" class="input input_white" id="tel" name="phone" maxlength="11" required
+                           placeholder="请输入注册时使用的手机号" autocomplete="off">
+                </div>
+                <div class="input_item clearfix">
+                    <div class="input_group clearfix">
+                        <input type="text" class="input input_white fl" id="code" name="code" maxlength="4"
+                               required
+                               placeholder="证明你不是坏人(✿◡‿◡)" autocomplete="off">
+                        <img src="{:url('login/code')}" alt="点击重试"
+                             onclick="this.src='{:url(\'login/code\')}'+'?'+Math.random()" width="98" height="39"
+                             style="outline: none;height: 44px;width: 100px;float: right;position: absolute;right: 0;top:-3px;cursor: pointer;z-index: 1;">
+                    </div>
+                </div>
+                <div class="input_item clearfix">
+                    <div class="input_group clearfix">
+                        <input type="text" class="input input_white first_child" id="smscode" maxlength="4"
+                               name="smscode"
+                               placeholder="请输入短信验证码"
+                               autocomplete="off">
+                        <input type="button" id="codebtn" class="btn btn_active btn_lg last_child"
+                               onclick="sendSmsCode()"
+                               value="获取验证码" maxlength="4" required>
+                    </div>
+                </div>
+
+                <div class="input_item clearfix">
+                    <input type="button" id="btn" class="btn btn_green btn_active btn_block" value="找回密码">
+                </div>
+
+            </div>
+
+
+            <div class="form_body" id="form-2" style="display:none;">
+                <div class="input_item clearfix">
+                    <input type="password" class="input input_white" id="password" name="password" placeholder="请输入新密码 "
+                           autocomplete="off">
+                </div>
+                <div class="input_item clearfix">
+                    <input type="password" class="input input_white" id="repassword" name="repassword" placeholder="请再次输入密码"
+                           autocomplete="off">
+                </div>
+                <div class="input_item clearfix">
+                    <input type="button" id="tbn-submit" class="btn btn_green btn_active btn_block" value="确定">
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+{js href="/static/index/js/jquery.min.js"}
+{js href="/static/admin/assets/js/layer.js"}
+
+<script>
+    $(function () {
+        $('#btn').click(function () {
+            //获取value值
+            var tel = $('#tel');
+            var smscode = $('#smscode');
+            var code = $('#code');
+
+            //验证手机号码长度
+            if (tel.val() == '' || tel.val().length != 11) {
+                layer.msg('手机号填写错误!');
+                tel.focus();
+                return;
+            }
+
+            //验证验证码长度
+            if (code.val() == '' || code.val().length != 4) {
+                layer.msg('验证码填写错误!');
+                code.focus();
+                return;
+            }
+
+            //验证验手机证码长度
+            if (smscode.val() == '' || smscode.val().length != 4) {
+                layer.msg('手机验证码填写错误!');
+                smscode.focus();
+                return;
+            }
+
+            $.ajax({
+                type: 'post',
+                url: '/index/login/passreset/',
+                dataType: 'json',
+                data: $('#myForm').serialize(),
+                success: function (data) {
+                    if (data.status) {
+                        $('#form-1').css('display', 'none');
+                        $('#form-2').css('display', 'block');
+                        $('.fr').attr('class','active line fr');
+                    } else {
+                        layer.msg(data.msg);
+                    }
+                },
+                error: function () {
+                    layer.msg('aJax执行失败!');
+                }
+            });
+        });
+
+        $('#tbn-submit').click(function () {
+            var password = $('#password');
+            var repassword = $('#repassword');
+
+            //检测是否输入密码
+            if(password.val() == '' || repassword.val() == '') {
+                layer.msg('密码和确认密码不能为空!');
+                return;
+            }
+            //检测密码是否相同
+            if (password.val() !== repassword.val()) {
+                layer.msg('两次输入密码不相同!');
+                password.val('');
+                repassword.val('');
+                password.focus();
+                return;
+            }
+
+            $.ajax({
+                type: 'post',
+                url: '/index/login/saverest/',
+                dataType: 'json',
+                data: $('#myForm').serialize(),
+                success: function (data) {
+                    if (data.status) {
+                        layer.msg(data.msg);
+                        setTimeout(function(){
+                            $(location).attr('href', '/login');
+                        },2000);
+                        return;
+                    } else {
+                        layer.msg(data.msg);
+                        return;
+                    }
+                },
+                error: function () {
+                    layer.msg('aJax执行失败!');
+                }
+            });
+        });
+    });
+
+    var countdown = 60;
+
+    function sendSmsCode() {
+        var obj = $("#codebtn");
+        var tel = $('#tel');
+
+        //验证手机号码长度
+        if (tel.val() == '' || tel.val().length != 11) {
+            layer.msg('请填写正确的手机号!');
+            tel.focus();
+            return;
+        }
+
+        settime(obj);
+
+        $.ajax({
+            type: 'get',
+            url: '/send/' + tel.val(),
+            dataType: 'json',
+            success: function (data) {
+                if (data.statusCode == '000000') {
+                    layer.msg('短信发送成功！');
+                } else {
+                    layer.msg(data.statusMsg);
+                }
+            },
+            error: function () {
+                layer.msg('aJax执行失败!');
+            }
+        });
+    }
+
+    function settime(obj) { //发送验证码倒计时
+        if (countdown == 0) {
+            obj.attr('disabled', false);
+            obj.val("免费获取验证码");
+            countdown = 60;
+            return;
+        } else {
+            obj.attr('disabled', true);
+            obj.val("重新发送(" + countdown + ")");
+            countdown--;
+        }
+        setTimeout(function () {
+                settime(obj)
+            }
+            , 1000)
+    }
+
+</script>
+</html>

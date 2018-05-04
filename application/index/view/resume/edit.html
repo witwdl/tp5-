@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)https://www.lagou.com/resume/basic.html?showQRCode=true -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- meta -->
+
+
+    <meta content="拉勾,拉勾网,拉勾招聘,拉钩, 拉钩网 ,互联网招聘,拉勾互联网招聘, 移动互联网招聘, 垂直互联网招聘, 微信招聘, 微博招聘, 拉勾官网, 拉勾百科,跳槽, 高薪职位, 互联网圈子, IT招聘, 职场招聘, 猎头招聘,O2O招聘, LBS招聘, 社交招聘, 校园招聘, 校招,社会招聘,社招"
+          name="keywords">
+
+    <meta content="拉勾网是3W旗下的互联网领域垂直招聘网站,互联网职业机会尽在拉勾网" name="description">
+
+    <title>基本信息-我的简历-拉勾网-专业的互联网招聘平台</title>
+
+    <link rel="Shortcut Icon" href="https://www.lgstatic.com/www/static/common/static/favicon_faed927.ico">
+
+
+
+
+
+
+    <!-- 公共样式 -->
+    <!-- 页面样式 -->
+    <!-- 动态token，防御伪造请求，重复提交 -->
+
+
+
+    <link rel="stylesheet" type="text/css" href="/static/index/resume/create/main.html_aio_600e9e8.css">
+    <link rel="stylesheet" type="text/css" href="/static/index/resume/create/widgets_4e04063.css">
+    <link rel="stylesheet" type="text/css" href="/static/index/resume/create/main.html_aio_2_cb301e0.css">
+    <link rel="stylesheet" href="/static/admin/assets/libs/layui/css/layui.css">
+    {js href="/static/admin/assets/libs/jquery/jquery-1.11.1.min.js"}
+    {js href="/static/admin/assets/libs/layui/layui.all.js"}
+
+</head>
+<body>
+<!-- 页面主体START -->
+<div class="container clearfix" id="container">
+    <div>
+        <div id="mr_wrapper">
+            <div id="mrHeader">
+                <dl class="collapsible_menu">
+                    <dt>
+                        <span id="nowrap">{:session('memberinfo')['phone']}</span>
+                        <i></i>
+                    </dt>
+                    <dd class="logout dn"><a href="https://www.lagou.com/frontLogout.do" rel="nofollow">退出</a></dd>
+                </dl>
+            </div>
+        </div>
+        <div class="mr_container">
+            <div class="mr_basic">
+                <dl class="mr_head">
+                    <dt>
+                        <img src="/static/index/resume/create/CgpFT1pQc-6AIIscAAC8m27ZBVk259.jpg" width="117"
+                             height="117" alt="头像" class="mr_headimg">
+                        <img src="/static/index/resume/create/mr_head_693ba0a.png" width="137" height="140" alt="头像"
+                             class="mr_headbg">
+                        <img src="/static/index/resume/create/mr_headhover_31fb395.png" width="119" height="118"
+                             class="mr_headhover">
+
+                        <input type="file" class="mr_headfile" id="headPic" name="headPic"
+                               title="支持jpg、jpeg、gif、png格式，文件小于10M">
+                    </dt>
+                    <dd><h2>基本信息</h2></dd>
+                </dl>
+                <form class="mr_basicform" action="{:url('index/resume/save')}" novalidate="novalidate" method="post">
+                    <input type="hidden" name="mid" value="{:session('memberinfo')['id']}">
+                    <div class="mr_basicname">
+                        <input type="text" name="name" placeholder="姓名">
+                    </div>
+
+                    <div class="mr_phone">
+                        <select class="form-control"  name = "maxbackground"style="background-color: #F8F8F8; width: 300px;height: 43px;padding: 8px">
+                            <option value="1">高中</optionv>
+                            <option value="2">大专</option>
+                            <option value="3">本科</option>
+                            <option value="4">研究生</option>
+                            <option value="5">博士</option>
+                            <option value="6">其他</option>
+                        </select>
+                    </div>
+                    <div class="mr_phone">
+                        <input type="text" name="phone" id="mrPhone" value="{:empty(session('memberinfo')['phone'])?'':session('memberinfo')['phone']}" placeholder="手机号">
+                        <div class="tips dn">
+                            <i></i>未经你的授权，企业不会看到你的联系方式，请放心填写：）
+                        </div>
+                    </div>
+
+                    <div class="mr_phone">
+                        <input type="text" name="email" id="mrEmail" placeholder="邮箱">
+                        <div class="tips dn">
+                            <i></i>未经你的授权，企业不会看到你的联系方式，请放心填写：）
+                        </div>
+                    </div>
+
+                    <div class="mr_phone">
+                        <select class="form-control" name="work_date" style="background-color: #F8F8F8; width: 300px;height: 43px;padding: 8px">
+                            <option value="0">应届毕业生</option>
+                            <option value="1">1年</option>
+                            <option value="2">2年</option>
+                            <option value="3">3年</option>
+                            <option value="4">4年</option>
+                            <option value="5">5年</option>
+                            <option value="6">6年</option>
+                            <option value="7">7年</option>
+                            <option value="8">8年以上</option>
+
+                        </select>
+                    </div>
+                    <div class="mr_phone">
+                        <textarea  id="" cols="39" rows="5" style="resize: none" placeholder="对自己评价" name="selfappraisal" maxlength="70"></textarea>
+                    </div>
+
+                    <label><input type="submit" id="mrSaveThree" value="继续完善职业信息" data-val="0"></label>
+
+                </form>
+                <div class="mr_btm">&nbsp;</div>
+            </div>
+
+        </div>
+
+<!-- 页面主体END -->
+
+<script>
+
+
+
+    // 执行AJAX删除
+    // function delAjax(id, obj) {
+    //     $.ajax({
+    //         type: 'delete',
+    //         url: '/node/' + id,
+    //         dataType : 'json',
+    //         success : function (data){
+    //             // console.log(data);
+    //             if (data.status) {
+    //                 layer.msg(data.info, {icon: 1,time: 3000});
+    //                 obj.remove();
+    //
+    //             } else {
+    //                 layer.msg(data.msg, {icon: 1,time: 3000});
+    //             }
+    //         },
+    //         error : function () {
+    //             alert('AJAX执行失败!');
+    //         }
+    //     });
+    // }
+
+    //企业logo上传
+    layui.use('upload', function () {
+        var upload = layui.upload;
+
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#headPic' //绑定元素
+            , url: '/indexresume' //上传接口
+            , method: 'post'
+            , accept: 'images'   //允许文件的类型
+            , size: 200 //最大允许上传文件的大小  KB
+            , field: 'img_url'
+            , done: function (res) {
+                if (res.code) {
+                    $('.mr_headimg').attr('src', '/uploads/resumepic/' + res.data.src);
+                    $('.mr_headhover').css('display','none');
+                    $('.mr_basicform').append('<input type="hidden" name="headpic" value="' + res.data.src + '" >');
+                    layer.msg(res.msg, {icon: 1, time: 1500});
+                } else {
+                    layer.msg(res.msg, {icon: 2, time: 1500});
+                }
+            }
+        });
+    });
+
+
+
+
+
+</script>
+
+</div>
+</body>
+</html>

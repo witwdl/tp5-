@@ -1,0 +1,176 @@
+{extend name="main/index" /}
+{block name="main"}
+<!-- Start right content -->
+<div class="content-page">
+    <!-- ============================================================== -->
+    <!-- Start Content here -->
+    <!-- ============================================================== -->
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="widget">
+                    <div class="widget-header transparent">
+                        <h2><strong>职位</strong> 列表</h2>
+                        <div class="additional-btn">
+                            <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                            <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+                            <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="data-table-toolbar">
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="toolbar-btn-action">
+                                        <a class="btn btn-success create-btn"><i class="fa fa-plus-circle"></i>新增</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table data-sortable class="table table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th>职位ID</th>
+                                    <th>各职位名称</th>
+                                    <th>工作年限</th>
+                                    <th>发布时间</th>
+                                    <th>职位描述</th>
+                                    <th data-sortable="false">操作</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {volist name="list" id="v"}
+                                <tr>
+                                    <td class="project-status" style="text-align: center;">
+                                        <span class="btn btn-success">{$v['id']}</span>
+                                    </td>
+                                    <td><strong>{$v['title']}</strong></td>
+                                    <td>{$v['age']}</td>
+                                    <td>{:date('Y-m-d H:i',$v.createtime)}</td>
+                                    <td class="ppx">{$v['content']}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-xs">
+                                            <a data-toggle="tooltip" title="查看" class="btn btn-default read-btn" data-id="{$v['id']}"><i class="fa fa-search"></i></a>
+
+                                            <a data-toggle="tooltip" title="编辑" data-id="{$v['id']}" class="btn btn-default edit-btn"><i class="fa fa-edit"></i></a>
+
+                                            <a data-toggle="tooltip" title="删除" class="btn btn-default del-btn" data-id="{$v['id']}"><i class="fa fa-times"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {/volist}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="data-table-toolbar">
+                            {$list->render()}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- End Content here -->
+</div>
+
+<script>
+
+
+    $(function () {
+        //create
+        $('.create-btn').click(function () {
+            //iframe层-父子操作
+            layer.open({
+                title: '新增职位信息',
+                type: 2,
+                area: ['1000px', '550px'],
+                fixed: false, //不固定
+                maxmin: true,
+                content: '/occupation/create/'
+            });
+        });
+
+        // 查看职位信息
+        $('.read-btn').click(function(){
+            var id = $(this).attr('data-id');
+
+            //iframe层-父子操作
+            layer.open({
+                title : '查看职位详情',
+                type: 2,
+                area: ['700px', '550px'],
+                fixed: false, //不固定
+                maxmin: true,
+                content: '/occupation/' + id,
+            });
+        });
+
+        //update
+        $('.edit-btn').click(function () {
+            var id = $(this).attr('data-id');
+            //iframe层-父子操作
+            layer.open({
+                title: '编辑职位信息',
+                type: 2,
+                area: ['1000px', '550px'],
+                fixed: false, //不固定
+                maxmin: true,
+                content: '/occupation/' + id + '/edit'
+            });
+        });
+        //delete
+        $('.del-btn').click(function () {
+            //获取用户ID
+            var id = $(this).attr('data-id');
+            var tr = $(this).parents('tr');
+            //询问框
+            var index = layer.confirm('您确认要删除该职位信息吗？', {
+                btn: ['确认', '取消'], //按钮
+                title: '提示',
+                icon: 7,
+            }, function () {
+                layer.close(index);
+                delAjax(id, tr);
+            });
+        });
+    });
+    // ajax delete mothod
+    function delAjax(id,tr) {
+        // console.log(id);
+        $.ajax({
+            type: 'delete',
+            url: '/occupation/' + id,
+            dataType: 'json',
+            success: function (data) {
+                if (data.status) {
+                    tr.remove();
+                    layer.msg(data.info, {icon: 1, time: 1500});
+                } else {
+                    layer.msg(data.msg, {icon: 2, time: 1500});
+                }
+            },
+            error: function () {
+                alert('AJax执行失败!');
+            }
+        });
+    }
+
+    $(function(){
+
+      $('.ppx').each(function(){
+      var maxwidth=15;
+      if($(this).text().length>maxwidth){
+      $(this).text($(this).text().substring(0,maxwidth));
+      $(this).html($(this).html()+'…');
+      }
+      });
+  });
+
+</script>
+{/block}

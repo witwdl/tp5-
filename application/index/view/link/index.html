@@ -1,0 +1,101 @@
+{extend name="index/index" /}
+{block name="main"}
+
+<div class="layui-container">
+    <div class="layui-row layui-col-space30">
+        <div class="layui-col-md6">
+                <p class="layui-text" style="font-size: 20px;">友情链接申请</p>
+            <hr class="layui-bg-green">
+
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">友链名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required  lay-verify="required" placeholder="请输入友情链接名称" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">友链地址</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="url" required  lay-verify="required" value="http://" placeholder="请填写连接时带上http:// 或 https:// 协议" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">网站介绍</label>
+                    <div class="layui-input-block">
+                        <textarea name="remark" maxlength="30" lay-verify="required" placeholder="控制在30字以内" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="save-btn">提交申请</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="layui-col-md6">
+            <div class="layui-row">
+                <p class="layui-text" style="font-size: 20px;"> 友情链接展示</p>
+                <hr class="layui-bg-green">
+            </div>
+            <div class="layui-row">
+                {volist name="link" id="v"}
+                <span><a href="{$v.url}" class="layui-btn layui-btn-primary" style="margin: 0 10px 6px;" target="_blank">{$v.title}</a></span>
+                {/volist}
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    layui.use('form', function () {
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(save-btn)', function (data) {
+
+            $.ajax({
+                type : 'post',
+                url : 'index/link/save',
+                data : data.field,
+                dataType : 'json',
+                success : function (data) {
+                    if(data.status) {
+                        parent.layer.msg(data.msg, {icon: 1, time: 1500});
+                        setTimeout(function () {
+                            CloseWebPage();
+                        },1500);
+                    } else {
+                        parent.layer.msg(data.msg, {icon: 2, time: 1500});
+                    }
+                },
+                error: function () {
+                    layer.msg('aJax执行失败!');
+                }
+            });
+            return false;
+        });
+    });
+
+    function CloseWebPage(){
+        if (navigator.userAgent.indexOf("MSIE") > 0) {
+            if (navigator.userAgent.indexOf("MSIE 6.0") > 0) {
+                window.opener = null;
+                window.close();
+            } else {
+                window.open('', '_top');
+                window.top.close();
+            }
+        }
+        else if (navigator.userAgent.indexOf("Firefox") > 0) {
+            window.location.href = 'about:blank ';
+        } else {
+            window.opener = null;
+            window.open('', '_self', '');
+            window.close();
+        }
+    }
+
+</script>
+{/block}

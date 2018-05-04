@@ -1,0 +1,507 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- meta -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+    <meta charset="UTF-8">
+    <meta content="互联网招聘,找工作,招聘网,人才网,法力兔,falitu" name="keywords">
+    <meta content="法力兔是权威的互联网行业招聘平台。提供全国真实可靠的互联网招聘信息。工资不面议。找工作、要招聘、搜人才就来法力兔。互联网行业找工作首选法力兔" name="description">
+    <title>法力兔-专业的互联网招聘平台_找工作_招聘_人才网_求职</title>
+    <link rel="Shortcut Icon" href="/favicon.ico">
+    {css href="/static/index/home/css/mcustomscrollbar_ac2fb8b.css"}
+    {css href="/static/index/home/css/layout_9d65133.css"}
+    {css href="/static/index/home/css/main.html_aio_89aae09.css"}
+    {css href="/static/index/home/css/widgets_4e04063.css"}
+    {css href="/static/index/home/css/main.html_aio_2_9d6e2e8.css"}
+    {css href="/static/admin/assets/libs/layui/css/layui.css"}
+    {css href="/static/index/position/css/main.html_aio_5ab6268.css"}
+    {css href="/static/index/position/css/main.html_aio_2_1410e60.css"}
+    {css href="/static/admin/assets/libs/simditor/styles/simditor.css"}
+    {css href="/static/index/page/page.css"}
+    <!--inclue company css start-->
+    {css href="/static/index/gongsi/css/main.html_aio_dc59779.css"}
+    {css href="/static/index/gongsi/css/main.html_aio_9323bed.css"}
+    <!--inclue company css end-->
+
+    <!--resume-->
+    {css href="/static/index/resume/resume/main.html_aio_7e9ee05.css"}
+    {css href="/static/index/resume/resume/main.html_aio_2_12feb30.css"}
+
+    <!--inclue position css start-->
+    {css href="/static/index/position/css/main.html_aio_2_1410e60.css"}
+    {css href="/static/index/position/css/main.html_aio_5ab6268.css"}
+    <!--inclue position css end-->
+
+    <!--inclue positionlist css start-->
+    {css href="/static/index/positionlist/css/main.html_aio_2_3c98000.css"}
+
+    {css href="/static/index/positionlist/css/main.html_aio_57e8c9c.css"}
+        <!--inclue positionlist css end-->
+
+
+     <!-- include jquery and layer -->
+    {js href="/static/admin/assets/libs/jquery/jquery-1.11.1.min.js"}
+    {js href="/static/admin/assets/libs/layui/layui.all.js"}
+    <!--include simditor-->
+    {js href="/static/admin/assets/libs/simditor/site/assets/scripts/module.js"}
+    {js href="/static/admin/assets/libs/simditor/site/assets/scripts/hotkeys.js"}
+    {js href="/static/admin/assets/libs/simditor/site/assets/scripts/uploader.js"}
+    {js href="/static/admin/assets/libs/simditor/lib/simditor.js"}
+    <script>
+
+        //检测如果不是PC端访问，直接跳转到手机端
+        if(!IsPC()) {
+            window.location.href = '/mobile';
+        }
+
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+    </script>
+</head>
+<body>
+
+<!--start #header-->
+<div id="lg_header">
+    <!--C端头部黑色导航-->
+    <div id="lg_tbar">
+        <div class="inner">
+            <ul class="lg_tbar_r">
+                {if condition="empty(session('memberinfo'))"}
+                <li>
+                    <a href="{:url('index/login/index')}" data-lg-tj-id="5f00" data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow">登录</a>
+                </li>
+                <li>
+                    <a href="{:url('index/register/index')}" class="bl" data-lg-tj-id="5g00" data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow">注册</a>
+                </li>
+                {else /}
+                {if condition="!empty(session('memberinfo')['username'])"}
+                <li>
+                    <a href="{:url('index/resume/index')}" data-lg-tj-id="5f00" data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow">我的简历</a>
+                </li>
+                <li>
+                    <a data-lg-tj-id="5f00" data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow">{:session('memberinfo')['username']}</a>
+                </li>
+                <li>
+                    <a href="{:url('index/login/logout')}" class="bl" data-lg-tj-id="5g00" data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow">退出</a>
+                </li>
+                {else /}
+                <li>
+                    <a href="{:url('index/resume/index')}" data-lg-tj-id="5f00" data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow">我的简历</a>
+                </li>
+                <li>
+                    <a data-lg-tj-id="5f00" data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow">{:session('memberinfo')['phone'] ? session('memberinfo')['phone'] : session('memberinfo')['email']}</a>
+                </li>
+                <li>
+                    <a href="{:url('index/login/logout')}" class="bl" data-lg-tj-id="5g00" data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow">退出</a>
+                </li>
+                {/if}
+                {/if}
+            </ul>
+        </div>
+    </div><!--end #lg_tbar-->
+
+    <!--C端头部白色导航-->
+    <div id="lg_tnav">
+        <div class="inner">
+            <div class="lg_tnav_l">
+                <a href="{:url('index/index')}" class="lg_logo" data-lg-tj-id="5h00" data-lg-tj-no="idnull" data-lg-tj-cid="idnull">
+                    <h1>法力兔</h1>
+                </a>
+            </div>
+            <ul class="lg_tnav_wrap">
+                <li>
+                    <a href="{:url('index/index')}" class="current">首页</a>
+                </li>
+                <li>
+                    <a href="{:url('index/company/index')}">公司</a>
+                </li>
+            </ul>
+        </div>
+    </div><!--end #lg_tnav-->
+</div>
+<!--end #header-->
+
+{block name="main"}
+<!-- 页面主体START -->
+<div class="container clearfix  has-login-toolbar " id="container" style="width: 1160px;">
+    <div class="contain-header">
+        <!-- 搜索 -->
+        <div class="search-wrapper" style="height: 70px;">
+            <div id="search_box" class="search_box">
+                <form id="searchForm" class="searchForm clearfix" name="searchForm" action="{:url('index/positionlist/search')}" method="get">
+                    <input type="text" id="search_input" class="search_input" tabindex="1" maxlength="64" name="search" autocomplete="off" value="" placeholder="搜索职位"/>
+                    <input type="submit" id="search_button" class="search_button" value="搜索"/>
+                </form>
+            </div>
+            <div class="pos-guess-wrapper">
+                <div class="guess_wrapper dn">
+                    <span>猜你要搜</span>
+                    <ul></ul>
+                </div>
+            </div>
+            <dl class="hotSearch" data-lg-tj-track-code="index_hotsearch" data-lg-tj-track-type="1"></dl>
+        </div>
+    </div>
+    <div class="container-body">
+        <div class="clearfix">
+            <div id="sidebar" class="sidebar" data-lg-tj-track-code="index_navigation" data-lg-tj-track-type="1">
+                <div class="mainNavs">
+                    {volist name='arr' id='v'}
+                    <div class="menu_box">
+                        <div class="menu_main job_hopping">
+                            <div class="category-list">
+                                <h2>
+                                    {$v['name']}
+                                </h2>
+                                <i class="arrow"></i>
+                                {volist name="v.next" id='v2'}
+                                {volist name = 'v2.next' id= 'v3'}
+                                <a href="{:url('index/positionlist/read',['id'=>$v3['id']])}">{$v3.name}</a>
+                                {/volist}
+                                {/volist}
+                            </div>
+                        </div>
+
+                        <div class="menu_sub dn">
+                            {volist name='v.next' id ='v2'}
+                            <dl>
+                                <dt>
+                                    <span>{$v2.name}</span>
+                                </dt>
+                                <dd>
+                                    {volist name="v2.next" id="v3"}
+                                    <a href="{:url('index/positionlist/read',['id'=>$v3['id']])}" data-lg-tj-id="4O00" data-lg-tj-no="0101" data-lg-tj-cid="idnull" class="curr">{$v3.name}</a>
+                                    {/volist}
+                                </dd>
+                            </dl>
+                            {/volist}
+                        </div>
+                    </div>
+                    {/volist}
+                </div>
+            </div>
+            <!--home banner start-->
+            <div id="home_banner" class="home_banner" data-lg-tj-track-code="index_bannerad" data-lg-tj-track-type="1">
+                <ul class="banner_bg" data-size="2">
+                    {volist name = 'banner' id= 'b'}
+                    <li class="banner_bg_1">
+
+
+                        <a class="tj_exposure" rel="nofollow" href="{$b.links}" target="_blank">
+                            <img src="{$b.img}" width="840" height="346" alt="{$b.title}"/>
+                        </a>
+                    </li>
+                    {/volist}
+
+                </ul>
+
+                <div class="banner_control">
+                    <em class="control control-left dn"></em>
+                    <em class="control control-right dn"></em>
+                    <ul class="thumbs">
+                        <li class="thumbs_1 current">
+                            <i class="circle"></i>
+                        </li>
+                        <li class="thumbs_2">
+                            <i class="circle"></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--home banner end-->
+
+            <ul class="job_tab module-tabs can-click" id="jobTab">
+                <li class="current hotTab" data-lg-tj-id="4X00" data-lg-tj-no="idnull" data-lg-tj-cid="idnull">热门职位</li>
+                <li class="newTab" data-lg-tj-id="gD00" data-lg-tj-no="idnull" data-lg-tj-cid="idnull">最新职位</li>
+            </ul>
+
+            <div class="job-list-wrapper">
+                <div class="job_list clearfix" id="jobList">
+                    <div class="hot_posHotPosition position_list init_joblist"
+                         data-lg-tj-track-code="index_hotjob"
+                         data-lg-tj-track-type="1">
+                        <!--热门职位 start -->
+                        <ul class="clearfix position_list_ul">
+                            {volist name="positionhot" id="val" }
+                            <li class="position_list_item default_list"
+                                data-jobid="3891456"
+                                data-positionid="3891456"
+                                data-salary="25k-35k"
+                                data-company="丽兹行"
+                                data-positionname="{$val.title}"
+                                data-companyid="124195">
+                                <div class="pli_top">
+                                    <div class="clearfix pli_top_l">
+                                        <div class="position_name fl">
+                                            <h2 class="dib clearfix">
+                                                <a href="{:url('index/position/read',['id'=>$val['id']])}"
+                                                   target="_blank"
+                                                   class="position_link fl wordCut"
+                                                   data-index="0"
+                                                   title="{$val.title}"
+                                                   data-lg-tj-id="rx00"
+                                                   data-lg-tj-no="0001"
+                                                   data-lg-tj-cid="3891456">{$val.title}</a>
+                                            </h2>
+                                            <!-- 此处需要和后台确要和后台确认 -->
+                                            <!--Y-m-d H:i-->
+                                            <span class="dib create-time">&ensp;[{:date('Y-m-d H:i',$val.createtime)}发布]&ensp;</span>
+
+                                            <input type="hidden" class='hr_portrait' value='i/image2/M00/18/39/CgoB5ln6s_CAItJbAABrxDodND8290.jpg'/>
+                                            <input type="hidden" class='hr_name' value='甄阳'/>
+                                            <input type="hidden" class='hr_position' value='招聘经理'/>
+                                            <input type="hidden" class='target_hr' value='6725894'/>
+                                            <input type="hidden" class='target_position' value='3891456'/>
+                                            <div class="chat_me" data-index="0" data-lg-tj-id="1WD0" data-lg-tj-no="0001" data-lg-tj-cid="3891456" data-lg-tj-track-code="index_code" data-lg-tj-track-type="1"></div>
+                                        </div>
+                                        <span class="salary fr">{$val.pay}</span>
+                                    </div>
+                                    <div class="position_main_info wordCut">
+                                        <span>经验{$val.age}</span>
+
+                                        <span>{$val.education}</span>
+                                    </div>
+                                </div>
+
+                                <div class="pli_btm clearfix">
+                                    <a href="{:url('index/company/read',['id'=> $val['cid']])}"
+                                       class="fl"
+                                       target="_blank"
+                                       data-lg-tj-id="19vn"
+                                       data-lg-tj-no="0001"
+                                       data-lg-tj-cid="124195">
+                                        <img src="/uploads/companylogo/{$val.company.img_url}" alt="公司logo" class="company-logo" width="40" height="40"/>
+                                    </a>
+
+                                    <div class="bottom-right">
+                                        <div class="company_name wordCut">
+                                            <a href="{:url('index/company/read',['id'=> $val['cid']])}"
+                                               target="_blank"
+                                               data-lg-tj-id="vz00"
+                                               data-lg-tj-no="0001"
+                                               data-lg-tj-cid="124195">{$val.company.name}</a>
+                                        </div>
+                                        <div class="industry wordCut">
+                                            <span>规模{$val.company.scale}</span>
+                                            <span>{$val.company.financing}</span>
+                                            <span>北京</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </li>
+                            {/volist}
+                        </ul>
+                    </div>
+                        <!--热门职位 end -->
+
+                     <!--z最新职位 satrt -->
+
+                    <div class="new_posHotPosition position_list" style="display:none;" data-lg-tj-track-code="index_lastjob" data-lg-tj-track-type="1">
+                        <ul class="clearfix position_list_ul">
+                            {volist name="positionnew" id="val" key="k"}
+                            <li class="position_list_item default_list" data-jobid="3876113" data-positionid="3876113" data-salary="10k-20k" data-company="汇通财经" data-positionname="{$val.title}" data-companyid="5160">
+
+                                <div class="pli_top">
+                                    <div class="clearfix pli_top_l">
+                                        <div class="position_name fl">
+                                            <h2 class="dib clearfix">
+                                                <a href="{:url('index/position/read',['id'=>$val['id']])}"
+                                                   target="_blank"
+                                                   class="position_link fl wordCut"
+                                                   data-index="0"
+                                                   title="{$val.title}"
+                                                   data-lg-tj-id="4q00"
+                                                   data-lg-tj-no="0001"
+                                                   data-lg-tj-cid="3876113">{$val.title}</a>
+                                            </h2>
+                                            <!-- 此处需要和后台确认 -->
+                                            <span class="dib create-time">&ensp;{:date('Y-m-d H:i',$val.createtime)}发布&ensp;</span>
+                                            <input type="hidden" class='hr_portrait' value='image1/M00/24/87/Cgo8PFVMgeeAETzRAABmhaPGTkg383.jpg'/>
+                                            <input type="hidden" class='hr_name' value='周德喜'/>
+                                            <input type="hidden" class='hr_position' value='北京分公司总经理'/>
+                                            <input type="hidden" class='target_hr' value='576547'/>
+                                            <input type="hidden" class='target_position' value='3876113'/>
+                                            <div class="chat_me" data-index="0" data-lg-tj-id="1WE0" data-lg-tj-no="0001" data-lg-tj-cid="3876113" data-lg-tj-track-code="index_code" data-lg-tj-track-type="1"></div>
+                                        </div>
+                                        <span class="salary fr">{$val.pay}</span>
+
+                                    </div>
+                                    <div class="position_main_info wordCut">
+                                        <span>经验{$val.age}</span>
+                                        <span>{$val.education}</span>
+                                    </div>
+                                </div>
+
+                                <div class="pli_btm clearfix">
+                                    <a href="{:url('index/company/read',['id'=>$val['cid']])}"
+                                       class="fl"
+                                       target="_blank"
+                                       data-lg-tj-id="19vp"
+                                       data-lg-tj-no="0001"
+                                       data-lg-tj-cid="5160">
+                                        <img src="/uploads/companylogo/{$val.company.img_url}" alt="公司logo" class="company-logo" width="40" height="40"/>
+                                    </a>
+
+                                    <div class="bottom-right">
+                                        <div class="company_name wordCut">
+                                            <a href="{:url('index/company/read',['id'=>$val['cid']])}"
+                                               target="_blank"
+                                               data-lg-tj-id="4r00"
+                                               data-lg-tj-no="0001"
+                                               data-lg-tj-cid="5160">{$val.company.name}</a>
+                                        </div>
+                                        <div class="industry wordCut">
+                                            <span>规模{$val.company.scale}</span>
+                                            <span>{$val.company.financing}</span>
+                                            <span>北京</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </li>
+                            {/volist}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <ul class="module-tabs">
+                <li class="current">热门公司</li>
+            </ul>
+            <div class="ad-companys">
+                <ul class="ad-company-list clearfix" data-lg-tj-track-code="index_logoad" data-lg-tj-track-type="1">
+                    {volist name="company" id="v"}
+                    <li class="company-item">
+                        <div class="top">
+                            <p>
+                                <a href="{:url('index/company/read',['id'=>$v['id']])}" target="_blank" class="tj_exposure" data-lg-tj-id="19pc" data-lg-tj-no="0001" data-lg-tj-cid="">
+                                    <img src="/uploads/companylogo/{$v['img_url']}" alt="公司logo" width="80" height="80">
+                                </a>
+                            </p>
+                            <p class="company-name wordCut">
+                                <a href="{:url('index/company/read',['id'=>$v['id']])}" target="_blank" data-lg-tj-id="19pd" data-lg-tj-no="0001" data-lg-tj-cid="">{$v['name']}</a>
+                            </p>
+                            <p class="indus-stage wordCut">
+                                <span>{$v['tid']}</span>
+                                <span>{$v['financing']}</span>
+                            </p>
+                            <p class="advantage wordCut">{$v['intro']}</p>
+                        </div>
+                        <div class="bottom clearfix">
+                            <a class="bottom-item bottom-1 fl" href="#" target="_blank" data-lg-tj-id="19pe" data-lg-tj-no="0001" data-lg-tj-cid="">
+                                <p class="green">
+                                    <span>10</span>
+                                </p>
+                                <p class="gray">企业评价</p>
+                            </a>
+                            <a class="bottom-item bottom-2 fl" href="#" target="_blank" data-lg-tj-id="19pf" data-lg-tj-no="0001" data-lg-tj-cid="">
+                                <p class="green">
+                                    <span>3</span>
+                                </p>
+                                <p class="gray">在招职位</p>
+                            </a>
+                            <a class="bottom-item bottom-3 fl" href="#" target="_blank" data-lg-tj-id="19pg" data-lg-tj-no="0001" data-lg-tj-cid="">
+                                <p class="green">
+                                    <span>100%</span>
+                                </p>
+                                <p class="gray">简历处理率</p>
+                            </a>
+                        </div>
+                    </li>
+                    {/volist}
+                </ul>
+                <a href="{:url('index/company/index')}" class="list_more" target="_blank" data-lg-tj-id="19r8" data-lg-tj-no="idnull" data-lg-tj-cid="idnull" data-lg-tj-track-code="index_checkmore" data-lg-tj-track-type="1">查看更多</a>
+            </div>
+
+
+            <!--link start-->
+            <div id="linkbox" class="linkbox show-linkbox">
+                <dl>
+                    <dt><span class="current">友情链接</span></dt>
+                    <dd class="links">
+                        {volist name="link" id="v"}
+                        <a href="{$v['url']}" target="_blank" class="friend-link">{$v['title']}</a>
+                        {/volist}
+                        <a href="{:url('index/link/index')}" target="_blank" class="more" rel="nofollow">更多</a>
+                    </dd>
+                    <span rel="nofollow" href="javascript:;" class="expansion">展开<i></i></span>
+                </dl>
+            </div>
+            <!--link end-->
+        </div>
+    </div>
+</div>
+
+<script>
+
+</script>
+<!-- 页面主体END -->
+{/block}
+<!--back to top start-->
+<a id="backtop" title="回到顶部" rel="nofollow"></a>
+<!--back to top end-->
+
+<!--footer start-->
+<div id="footer">
+    <div class="wrapper">
+        <div class="" style="text-align: center;">
+            <a href="javascript:;" target="_blank" rel="nofollow">帮助中心</a>
+            <a href="javascript:;" target="_blank" rel="nofollow">联系我们</a>
+            <a href="javascript:;" target="_blank" rel="nofollow">招聘解决方案</a>
+            <span class="tel">服务热线：<em>4006-2828-35 (9:00 -18:00)</em></span>
+        </div>
+        <div class="copyright">
+            <span><em>&copy;</em>2017 FALITU</span>
+            <a target="_blank" href="http://www.miitbeian.gov.cn/state/outPortal/loginPortal.action" rel="nofollow">沪ICP备17051768号-1</a>
+        </div>
+    </div>
+</div>
+<!--footer end-->
+{js href="/static/index/home/js/vendor_e3ddeee.js"}
+{js href="/static/index/home/js/widgets_64872eb.js"}
+{js href="/static/index/home/js/layout_6a3a86f.js"}
+{js href="/static/index/home/js/main.html_aio_2_015bc0e.js"}
+
+<!--inclue position js start-->
+{js href="/static/index/position/js/excanvas_329c23c.js"}
+{js href="/static/index/position/js/main.html_aio_b1a1945.js"}
+{js href="/static/index/position/js/userinfo_7f282e9.js"}
+{js href="/static/index/position/js/main.html_aio_2_fb11952.js"}
+{js href="/static/index/position/js/lg-analytics_ea85146.js"}
+{js href="/static/index/position/js/plat_tj_resume_log_1097b01.js"}
+{js href="/static/index/position/js/oss.js"}
+<!--inclue position js start-->
+
+
+<!--inclue company js start-->
+{js href="/static/index/gongsi/js/main.html_aio_2_21c87e3.js"}
+{js href="/static/index/gongsi/js/main.html_aio_b1a1945.js"}
+{js href="/static/index/gongsi/js/lg-analytics_ea85146.js"}
+<!--inclue company js end-->
+
+
+<script type="text/javascript">
+    window.global = window.global || {};
+    require(['common/widgets/footer_c/layout/main']);
+    //业务主模块入口
+    require(['index/page/index/main']);
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+{extend name="main/index" /}
+{block name="main"}
+<!-- Start right content -->
+<div class="content-page">
+    <!-- ============================================================== -->
+    <!-- Start Content here -->
+    <!-- ============================================================== -->
+    <div class="content">
+        <!-- Your awesome content goes here -->
+        <div class="row">
+
+            <div class="col-sm-12 portlets">
+
+                <div class="widget">
+                    <div class="widget-header transparent">
+                        <h2><strong>编辑</strong> 会员</h2>
+                        <div class="additional-btn">
+                            <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                            <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+                            <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
+                        </div>
+                    </div>
+                    <div class="widget-content padding">
+                        <div id="basic-form">
+                            <form role="form" action="{:url('admin/member/update',['id'=>$data['id']])}" method="post">
+                                <input type="hidden" name="_method" value="PUT">
+                                <div class="form-group">
+                                    <label for="username">会员名</label>
+                                    <input type="text" name="username" value="{$data['username']}" class="form-control" id="username" placeholder="输入会员名">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">手机号</label>
+                                    <input type="text" name="phone" value="{$data['phone']}" class="form-control" id="phone" placeholder="输入手机号">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">邮箱</label>
+                                    <input type="text" name="email" value="{$data['email']}" class="form-control" id="email" placeholder="输入邮箱">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">用户类型</label>
+                                    <select class="form-control" name="type">
+                                        <option value="0" {$data['type']? 'selected' : ''}>个人用户</option>
+                                        <option value="1" {$data['type']? 'selected' : ''}>企业用户</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="userpass">密码</label>
+                                    <input type="password" name="userpass" class="form-control" id="userpass" placeholder="输入密码">
+                                </div>
+                                <div class="form-group">
+                                    <label for="reuserpass">密码</label>
+                                    <input type="password" name="reuserpass" class="form-control" id="reuserpass" placeholder="输入确认密码">
+                                </div>
+                                <button type="submit" class="btn btn-success">修改</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End content here -->
+    <!-- ============================================================== -->
+
+</div>
+<!-- End right content -->
+{/block}

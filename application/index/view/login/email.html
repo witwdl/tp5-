@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit">
+
+    <meta content="法力兔, falitu, 法力兔招聘, 招聘, 互联网招聘, 法力兔互联网招聘, 移动互联网招聘, 垂直互联网招聘, 微信招聘, 微博招聘, 法力兔官网, 法力兔百科, 跳槽, 高薪职位, 互联网圈子, IT招聘, 职场招聘, 猎头招聘,O2O招聘, LBS招聘, 社交招聘, 校园招聘, 校招,社会招聘,社招" name="keywords">
+
+    <meta content="法力兔是3W旗下的互联网领域垂直招聘网站" name="description">
+
+    <title>找工作-招聘求职网-法力兔</title>
+
+    <link rel="Shortcut Icon" href="/favicon.ico">
+
+    <!-- H5	 -->
+    <!--[if lt IE 9]>
+    {js href="/static/index/js/html5shiv.min.js"}
+    {js href="/static/index/js/respond.min.js"}
+    <![endif]-->
+
+    {css href="/static/index/css/login.css"}
+</head>
+
+<body>
+<!-- 页面主体START -->
+<header class="sso_header">
+    <a href="{:url('/')}" class="logo"></a>
+</header>
+<section class="content_box cleafix">
+    <div class="left_area fl">
+        <div class="form_head">
+            <ul class="form_head clearfix">
+                <li class="active" data-lg-tj-id="1Us0" data-lg-tj-no="idnull" data-lg-tj-cid="idnull">
+                    用户登录
+                </li>
+            </ul>
+            <span class="tab_active"></span>
+        </div>
+        <div class="form_body">
+            <form class="active" action="{:url('login/login')}" method="post">
+                <div class="input_item clearfix" data-propertyname="username" data-controltype="Phone">
+                    <input type="text" class="input input_white"  name="username" id="username"  placeholder="请输入手机号" required autocomplete="off">
+                </div>
+                <div class="input_item clearfix" data-propertyname="password" data-controltype="Password">
+                    <input type="password" class="input input_white" name="password" maxlength="20" placeholder="请输入密码" required autocomplete="off">
+                </div>
+                <div class="input_item clearfix" data-propertyname="request_form_verifyCode" data-controltype="VerifyCode">
+                    <div class="input_group clearfix">
+                        <input type="text" class="input input_white" name="code" maxlength="4" placeholder="请输入手机验证码" style="float: left;width: 190px;padding-right: 0px;"  required autocomplete="off">
+                        <input type="button" id="btn" value="免费获取验证码" onclick="sendcode()" style="outline: none;height: 44px;width: 100px;float: right;position: absolute;right: 0;"/>
+                    </div>
+                </div>
+                <div class="input_item clearfix">
+                    <a rel="nofollow" href="../accountPwd/toReset.html" class="forgot_pwd">忘记密码？</a>
+                </div>
+                <div class="input_item btn_group clearfix" data-propertyname="submit" data-controltype="Botton">
+                    <input type="submit" class="btn btn_green btn_active btn_block btn_lg" value="登&nbsp;录" data-lg-tj-id="1j90" data-lg-tj-no="idnull" data-lg-tj-cid="idnull">
+                </div>
+            </form>
+        </div>
+        <div>
+        </div>
+    </div>
+
+    <div class="divider fl"></div>
+    <div class="right_area fl">
+        <h5>还没有帐号:</h5>
+        <a href="{:url('/register')}" class="register_now" data-lg-tj-id="1ja0" data-lg-tj-no="idnull" data-lg-tj-cid="idnull">立即注册</a>
+        <h5>使用以下帐号直接登录:</h5>
+        <ul class="vender_login clearfix">
+            <li>
+                <a rel="nofollow" href="https://passport.lagou.com/oauth20/auth_qqProvider.html" title="使用腾讯QQ帐号登录" class="vender_icon icon_tencent" target="_blank" data-lg-tj-id="1jc0" data-lg-tj-no="idnull" data-lg-tj-cid="idnull"></a>
+            </li>
+            <li>
+                <a rel="nofollow" href="https://passport.lagou.com/oauth20/auth_weixinProvider.html" class="vender_icon icon_wechat" title="使用微信帐号登录" target="_blank" data-lg-tj-id="1jd0" data-lg-tj-no="idnull" data-lg-tj-cid="idnull"></a>
+            </li>
+        </ul>
+    </div>
+</section>
+
+{js href="/static/index/js/jquery.min.js"}
+{js href="/static/admin/assets/js/layer.js"}
+
+<script>
+    var countdown=60;
+
+    function sendcode(){
+        var obj = $("#btn");
+        var email = $("#username").val();
+        settime(obj);
+
+        $.ajax({
+        type: 'get',
+        url: '/email/' + email,
+        dataType : 'json',
+        success : function (data){
+            if(data.statusCode == '000000') {
+                layer.msg('发送成功！');
+            } else {
+                layer.msg(data.statusMsg);
+            }
+
+        },
+        error : function () {
+            layer.msg('AJAX执行失败!');
+        }
+    });
+
+    }
+    function settime(obj) { //发送验证码倒计时
+        if (countdown == 0) {
+            obj.attr('disabled',false);
+            //obj.removeattr("disabled");
+            obj.val("免费获取验证码");
+            countdown = 60;
+            return;
+        } else {
+            obj.attr('disabled',true);
+            obj.val("重新发送(" + countdown + ")");
+            countdown--;
+        }
+        setTimeout(function() {
+                settime(obj) }
+            ,1000)
+    }
+</script>
+</body>
+</html>
